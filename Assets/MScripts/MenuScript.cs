@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class MenuScript : MonoBehaviour
 {
@@ -15,6 +17,15 @@ public class MenuScript : MonoBehaviour
     public GameObject displayMenu;
     public GameObject controlsMenu;
     public GameObject audioMenu;
+
+    //Audio
+
+    public AudioMixer mVolume;
+
+    //Resolution Variables
+    private int[] wid = { 720, 1024, 1280, 1366, 1440, 1600, 1920 };
+    private int[] leng = { 480, 768, 720, 768, 900, 900, 1080 };
+    private bool isFullscreen;
 
     //Awake is called before anything
     void Awake()
@@ -61,15 +72,15 @@ public class MenuScript : MonoBehaviour
                     audioMenu.SetActive(false);
                     break;
 
-            //Display Panel
-            case MenuStates.Display:
-                    optionMenu.SetActive(true);
-                    mainMenu.SetActive(false);
-                    gamemodeMenu.SetActive(false);
-                    displayMenu.SetActive(true);
-                    controlsMenu.SetActive(false);
-                    audioMenu.SetActive(false);
-                    break;
+                //Display Panel
+                case MenuStates.Display:
+                     optionMenu.SetActive(true);
+                     mainMenu.SetActive(false);
+                     gamemodeMenu.SetActive(false);
+                     displayMenu.SetActive(true);
+                     controlsMenu.SetActive(false);
+                     audioMenu.SetActive(false);
+                     break;
 
                 //Control Panel
                 case MenuStates.Controls:
@@ -98,12 +109,10 @@ public class MenuScript : MonoBehaviour
             {
                 currentState = MenuStates.Main;
             }
-
         }
-
     }
 
-    //Butons ===============================
+    //Menu Butons ==========================
     public void QuitGame()
     { 
         Application.Quit();
@@ -147,6 +156,56 @@ public class MenuScript : MonoBehaviour
         currentState = MenuStates.Display;
     }
 
+    //Set Resolution Dropdown
+    public void setResolution(int val)
+    {
+        
+
+        switch (val)
+        {
+            case 0:
+                Screen.SetResolution(wid[0], leng[0], isFullscreen);
+                break;
+            case 1:
+                Screen.SetResolution(wid[1], leng[1], isFullscreen);
+                break;
+            case 2:
+                Screen.SetResolution(wid[2], leng[2], isFullscreen);
+                break;
+            case 3:
+                Screen.SetResolution(wid[3], leng[3], isFullscreen);
+                break;
+            case 4:
+                Screen.SetResolution(wid[4], leng[4], isFullscreen);
+                break;
+            case 5:
+                Screen.SetResolution(wid[5], leng[5], isFullscreen);
+                break;
+            case 6:
+                Screen.SetResolution(wid[6], leng[6], isFullscreen);
+                break;
+        }
+    }
+
+    //Set Display Mode Dropdown
+    public void setDisplay(int val)
+    {
+        switch(val)
+        {
+            case 0:
+                Screen.fullScreen = false;
+                isFullscreen = false;
+                break;
+            case 1:
+                Screen.fullScreen = true;
+                isFullscreen = true;
+                break;
+            case 2:
+                Screen.SetResolution(1920,1080, false);
+                break;
+        }
+    }
+
 
     //Audio Buttons
     public void AudioButton()
@@ -154,13 +213,16 @@ public class MenuScript : MonoBehaviour
         currentState = MenuStates.Audio;
     }
 
+    public void setVolume(float masterVolume)
+    {
+        mVolume.SetFloat("masterVolume", masterVolume);
+    }
+
     //Control Buttons
     public void ControlsButton()
     {
         currentState = MenuStates.Controls;
     }
-
-
 }
 
 
