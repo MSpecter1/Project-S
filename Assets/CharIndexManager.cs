@@ -11,11 +11,14 @@ public class CharIndexManager : MonoBehaviour
 {
     public int P1CIndex;
     public int P2Cindex;
+    public bool selected;
 
-    public List<GameObject> CharList = new List<GameObject>();
+    public List<GameObject> P1CharList = new List<GameObject>();
+    public List<GameObject> P2CharList = new List<GameObject>();
 
     void Awake()
     {
+        P2CharList = P1CharList;
         DontDestroyOnLoad(this);
     }
 
