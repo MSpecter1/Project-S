@@ -432,7 +432,7 @@ MonoBehaviour:
   - text: {fileID: 1747149369}
     minAlpha: 0.3
     maxAlpha: 1
-    timerAlpha: 2
+    timerAlpha: 1.5
 --- !u!4 &1512588198
 Transform:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class GoToMainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("to main menu started");
     }
 
     // Update is called once per frame
@@ -16,6 +16,7 @@ public class GoToMainMenu : MonoBehaviour
     {
         if (Input.anyKey)
         {
+            Debug.Log("Any key is pressed");
             SceneManager.LoadScene("MainMenu");
         }
     }

@@ -14,7 +14,7 @@ public class MenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void QuitGame()
@@ -24,7 +24,8 @@ public class MenuScript : MonoBehaviour
 
     public void ToDevStage()
     {
-        SceneManager.LoadScene("DevStage");
+        //MAKE SURE SCENE NAME IS CORRECT
+        SceneManager.LoadScene("TestDevStage");
     }
 
 }
