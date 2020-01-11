@@ -4,8 +4,7 @@ using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 
-// Start is called before the first frame update
-
+// Initializes the list of P1/P2 character prefabs
 
 public class CharIndexManager : MonoBehaviour
 {

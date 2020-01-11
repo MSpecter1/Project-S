@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//OUTDATED, REPLACED BY UNITY INPUT SYSTEM
+
 public class MuayThaiSebbyInput : MonoBehaviour
 {
     public MuayThaiSebbyController controller;

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 
+//Charaacter script for training mode punching bag
+
 public class PunchingBag : MonoBehaviour
 {
     private Rigidbody2D m_Rigidbody2D;

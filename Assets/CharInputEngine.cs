@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Handles inputs from keyboard/controller
+// Causes Basic Movement (walking and jumping so far)
+// Causes Basic Attacks and implements special attack function (no command normals yet)
+
 public class CharInputEngine: MonoBehaviour
 {
     public MoveController mControl;
@@ -13,8 +17,8 @@ public class CharInputEngine: MonoBehaviour
 
     public string PlayerName;
     public bool faceRight;
-    private bool blockState=false;
-    private bool jumpState=false;
+    private bool blockState = false;
+    private bool jumpState = false;
     private bool crouchState = false;
 
     public float MoveSpeed;
