@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-//USED ONLY WITH INPUT SYSTEM
-
 public class @CharInputSystem : IInputActionCollection, IDisposable
 {
     private InputActionAsset asset;

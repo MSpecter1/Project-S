@@ -268,7 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mControl: {fileID: 222833959046851781}
   animator: {fileID: 222833959046851783}
-  playerInput: {fileID: 0}
+  playerInput: {fileID: 1004449837331179068}
   actionInput:
     m_Name: Action Input
     m_Type: 0

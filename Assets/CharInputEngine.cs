@@ -30,25 +30,28 @@ public class CharInputEngine: MonoBehaviour
     private bool inRecovery;
 
     public Transform target;
-    public CharInputSystem InputSystem;
 
     //Input buffer vector, discard actions after a time, 
 
     void Awake()
     {
-        InputSystem = new CharInputSystem();
-        //actionInput.actionMap.
+        if (transform.name == "P2Char")
+        {
+            playerInput.currentActionMap.Disable();
+            playerInput.SwitchCurrentActionMap("FGInputsKeyboard2");
+        }
+        playerInput.currentActionMap.Enable();
+        Debug.Log(playerInput.currentActionMap);
     }
 
     void OnEnable()
     {
-        InputSystem.Enable();
-        
-        // REMOVE LATER // InputSystem.FGInputsKeyboard.swithc
+        //InputSystem.Enable();
+
     }
     void OnDisable()
     {
-        InputSystem.Disable();
+        //InputSystem.Disable();
     }
 
     // Start is called before the first frame update
@@ -111,12 +114,14 @@ public class CharInputEngine: MonoBehaviour
         {
 
             //REMOVE LATER MH MH MH
-            var temp = InputSystem.FGInputsKeyboard.Move.ReadValue<Vector2>(); ;
-            if (transform.name=="P2Char")
-            {
-                temp = InputSystem.FGInputsKeyboard2.Move.ReadValue<Vector2>();
-            }
-           
+            //var temp = InputSystem.FGInputsKeyboard.Move.ReadValue<Vector2>(); ;
+            //if (transform.name=="P2Char")
+            //{
+            //    temp = InputSystem.FGInputsKeyboard2.Move.ReadValue<Vector2>();
+            //}
+            var temp = playerInput.currentActionMap.FindAction("Move", false).ReadValue<Vector2>();
+            Debug.Log(playerInput.currentActionMap);
+
             var movement = new Vector3();
             movement.x = temp.x;
             movement.z = temp.y;

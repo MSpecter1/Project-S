@@ -13,7 +13,6 @@ public class CharLoaderScript : MonoBehaviour
     public Vector3 p2start = new Vector3(15, -13, 32);
     public GameObject P1Char;
     public GameObject P2Char;
-    public playerinput;
 
     // Start is called before the first frame update\
     void Start()

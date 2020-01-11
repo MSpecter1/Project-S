@@ -888,6 +888,11 @@ PrefabInstance:
       propertyPath: PlayerControl.m_Name
       value: Player Control
       objectReference: {fileID: 0}
+    - target: {fileID: 222833959046851788, guid: b6ed0029f05ad3e4fb05d3b4b33d9a28,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6ed0029f05ad3e4fb05d3b4b33d9a28, type: 3}
 --- !u!1 &532503916
