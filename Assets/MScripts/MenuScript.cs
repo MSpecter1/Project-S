@@ -36,7 +36,7 @@ public class MenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    
             //Checks current menu state
             switch (currentState)
             {
@@ -118,6 +118,11 @@ public class MenuScript : MonoBehaviour
         Application.Quit();
     }
 
+    public void ToDevStage()
+    {
+        //MAKE SURE SCENE NAME IS CORRECT
+        SceneManager.LoadScene("TestDevStage");
+    }
     //Single Player Button 
     public void PlayGame()
     {
