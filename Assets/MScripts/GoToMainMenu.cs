@@ -9,6 +9,7 @@ public class GoToMainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("to main menu started");
         Screen.SetResolution(1280,720, false);
     }
 
@@ -17,6 +18,7 @@ public class GoToMainMenu : MonoBehaviour
     {
         if (Input.anyKey)
         {
+            Debug.Log("Any key is pressed");
             SceneManager.LoadScene("MainMenu");
         }
     }
