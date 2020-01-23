@@ -7,14 +7,18 @@ using UnityEngine;
 public class MTSebbyFunctions : MonoBehaviour
 {
     public CharInputEngine CharInputEngine;
+    public CharHPManager hpmanager;
+
     public Animator animator;
+
     public GameObject FireballStartLoc;
     public GameObject HadoukenFire;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //SET UNIQUE HP
+        hpmanager.setHP(10000);
     }
 
     // Update is called once per frame
