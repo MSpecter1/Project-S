@@ -14,30 +14,47 @@ public class CharHPManager : MonoBehaviour
     public CharInputEngine CharInputEngine;
     
     //HP MANAGERMENT VARIABLES
-    public int CharHP = 10000;
-    public TMP_Text HealthText;
+    public int CharHP;
+    public int CharMaxHP;
+    
     public bool deadState = false;
     public bool invincibleState = false;
+    public HealthBar healthbar;
     SpriteRenderer SpriteRenderer;
 
-    // Start is called before the first frame update
+    public float floathp;
+
     void Start()
     {
+        //LOAD COMPONANTS ONTO VARIABLES
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         if (transform.name=="P1Char")
         {
-            HealthText = GameObject.Find("P1HealthBar").GetComponent<TMP_Text>();
+            healthbar = GameObject.Find("P1HealthBar").GetComponent<HealthBar>();
         }
-        else
+        else if (transform.name == "P2Char")
         {
-            HealthText = GameObject.Find("P2HealthBar").GetComponent<TMP_Text>();
+            healthbar = GameObject.Find("P2HealthBar").GetComponent<HealthBar>();
+        }
+      
+    }
+
+    void Update()
+    {
+        //UPDATE HEALTH BAR DISPLAY
+        floathp = (float)CharHP / CharMaxHP;
+        healthbar.setSize(floathp);
+        //IF HP IS BELOW 20% START FLASHING RED
+        if (!healthbar.lowHP && floathp < 0.2f)
+        {
+            healthbar.startFlashing();
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void setHP(int hp)
     {
-        HealthText.text = transform.name+": " + CharHP +"/10000"; //DEBUG/PLACEHOLDER PURPOSES FOR NOW
+        CharHP = hp;
+        CharMaxHP = CharHP;
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -53,7 +70,7 @@ public class CharHPManager : MonoBehaviour
         }
 
         // TEMPORARY REMOVE LATER
-        if (col.gameObject.layer == LayerMask.NameToLayer("Hitbox") || col.gameObject.layer == LayerMask.NameToLayer("ProjectileHitbox") && !invincibleState && !deadState) //IF HIT BY HITBOX FROM ENEMY ATTACK
+        if ((col.gameObject.layer == LayerMask.NameToLayer("Hitbox") || col.gameObject.layer == LayerMask.NameToLayer("ProjectileHitbox")) && !invincibleState && !deadState) //IF HIT BY HITBOX FROM ENEMY ATTACK
         {
             Debug.Log("HIT");
             StartCoroutine(FlashDamageTaken());
