@@ -12,6 +12,7 @@ public class MTSebbyFunctions : MonoBehaviour
     public Animator animator;
 
     public GameObject FireballStartLoc;
+    public GameObject ultFireballStartLoc;
     public GameObject HadoukenFire;
 
     // Start is called before the first frame update
@@ -53,4 +54,56 @@ public class MTSebbyFunctions : MonoBehaviour
         }
 
     }
+
+    public void LaunchUltHadouken() //SPECIAL ATTACK 1
+    {
+        GameObject b = Instantiate(HadoukenFire) as GameObject;
+        b.transform.position = ultFireballStartLoc.transform.position;
+        //START Ult CHARGEUP
+        
+        SpriteRenderer sprite = b.GetComponent<SpriteRenderer>();
+        sprite.color = Color.red;
+
+        Time.timeScale = 0;
+        StartCoroutine(ChargeUlt(b));
+
+        //FINISH Ult CHARGEUP
+
+        if (CharInputEngine.faceRight) //CHECK FLIP
+        {
+            b.GetComponent<Rigidbody2D>().velocity = transform.right * 80;
+        }
+        else
+        {
+            Vector3 theScale = b.transform.localScale;
+            theScale.x *= -1;
+            b.transform.localScale = theScale; //flip sprite
+
+            b.GetComponent<Rigidbody2D>().velocity = -transform.right * 80;
+        }
+
+    }
+
+    IEnumerator ChargeUlt(GameObject b)
+    {
+        SpriteRenderer sprite = b.GetComponent<SpriteRenderer>();
+        Vector3 sizechange = new Vector3(1, 1, 1);
+        float vectorx = 1, vectory = 1;
+        for (int i = 0; i < 300; i++)
+        {
+            
+            Time.timeScale = 0;
+            sizechange.x = (float)vectorx*i / 60;
+            sizechange.y = (float)vectory*i / 60;
+            b.transform.localScale = sizechange;
+            //SpriteRenderer.color = Color.red;
+            //yield return new WaitForSeconds(.1f);
+            //SpriteRenderer.color = Color.white;
+            //yield return new WaitForSeconds(.1f);
+            yield return null;
+        }
+        Time.timeScale = 1;
+        
+    }
 }
+

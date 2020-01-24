@@ -51,7 +51,7 @@ public class CharLoaderScript : MonoBehaviour
         targetGroup.m_Targets.SetValue(target2, 1);
         return;
 
-        
+     
     }
 
 }

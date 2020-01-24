@@ -10,7 +10,6 @@ public class HealthBar : MonoBehaviour
     public bool lowHP=false;
     void Start()
     {
-
         bar = transform.Find("Bar");
         if (transform.name=="P1HealthBar")
         {

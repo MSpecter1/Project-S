@@ -13,7 +13,6 @@ public class CharInputEngine: MonoBehaviour
     public MoveController mControl;
     public Animator animator;
     public PlayerInput playerInput;
-    public InputAction actionInput;
 
     public string PlayerName;
     public bool faceRight;
@@ -68,6 +67,7 @@ public class CharInputEngine: MonoBehaviour
         //ENABLE CONTROLS
 
         playerInput.currentActionMap.Disable();
+        //ADD COROUTINE for Round Manager
         if (transform.name == "P2Char")
         {
             playerInput.SwitchCurrentActionMap("FGInputsKeyboard2");
