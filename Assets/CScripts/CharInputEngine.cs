@@ -156,34 +156,23 @@ public class CharInputEngine: MonoBehaviour
 
     void OnNAttackLight()
     {
-        if (!animator.GetBool("Walking"))
-        {
             animator.SetTrigger("lightNormal");
-        }
+
     }
 
     void OnNAttackMedium()
     {
-        if (!animator.GetBool("Walking"))
-        {
             animator.SetTrigger("mediumNormal");
-        }
     }
 
     void OnNAttackHeavy()
     {
-        if (!animator.GetBool("Walking"))
-        {
             animator.SetTrigger("heavyNormal");
-        }
     }
 
     void OnSpecialAttack()
     {
-        if (!animator.GetBool("Walking"))
-        {
             animator.SetTrigger("specialAttack1");
-        }
     }
 
     //NON-INPUT FUNCTIONS

@@ -57,6 +57,32 @@ public class CharHPManager : MonoBehaviour
         CharMaxHP = CharHP;
     }
 
+    public void resetChar()
+    {
+        if (transform.name=="P1Char")
+        { 
+            transform.position = GameObject.Find("CSSScriptsObject").GetComponent<CharLoaderScript>().p1start; 
+        }
+        else if (transform.name == "P2Char")
+        { 
+            transform.position = GameObject.Find("CSSScriptsObject").GetComponent<CharLoaderScript>().p2start; 
+        }
+        CharHP = CharMaxHP;
+        deadState = false;
+        invincibleState = false;
+
+}
+
+    public void PlayerDied()
+    {
+        //SET ROUNDMANAGER BOOL
+        GameObject.Find("RoundManager").GetComponent<RoundManager>().setDeath(gameObject);
+        //SET OTHER BOOLS
+        deadState = true;
+        invincibleState = true;
+        CharInputEngine.animator.SetBool("deadState", true);
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         float LaunchDirection = 0; //CALCULATE LAUNCH DIRECTION IF HIT
@@ -70,34 +96,36 @@ public class CharHPManager : MonoBehaviour
         }
 
         // TEMPORARY REMOVE LATER
-        if ((col.gameObject.layer == LayerMask.NameToLayer("Hitbox") || col.gameObject.layer == LayerMask.NameToLayer("ProjectileHitbox")) && !invincibleState && !deadState) //IF HIT BY HITBOX FROM ENEMY ATTACK
+        if ((col.gameObject.layer == LayerMask.NameToLayer("Hitbox") || col.gameObject.layer == LayerMask.NameToLayer("ProjectileHitbox")) && !invincibleState) //IF HIT BY HITBOX FROM ENEMY ATTACK
         {
             Debug.Log("HIT");
             StartCoroutine(FlashDamageTaken());
-            CharHP -= 1000;
+            if (CharHP>0)
+            {
+                CharHP -= 1000;
+            }
             if (CharHP <= 0)
             {
-                deadState = true;
-                CharInputEngine.animator.SetBool("deadState", true);
-                //transform.Rotate(0, 0, 90); //LAY ON SIDE IF DEAD
+                PlayerDied();
             }
-            m_Rigidbody2D.velocity = new Vector2(LaunchDirection, 1) * 30f; //TEMPORARY CODE, EACH UNIQUE HIT SHOULD HAVE DIFFERENT LAUNCH FORCE
+
+            //TEMPORARY CODE, EACH UNIQUE HIT SHOULD HAVE DIFFERENT LAUNCH FORCE
             //HITTER SHOULD BE THE ONE THAT CAUSES "OTHER" TO GO FLYING
+            m_Rigidbody2D.velocity = new Vector2(LaunchDirection, 1) * 10f;
         }
     }
 
     IEnumerator FlashDamageTaken()
     {
-        invincibleState = !invincibleState;
+        //invincibleState = !invincibleState;
         for (int i = 0; i < 4; i++)
         {
-
             SpriteRenderer = GetComponent<SpriteRenderer>();
             SpriteRenderer.color = Color.red;
             yield return new WaitForSeconds(.1f);
             SpriteRenderer.color = Color.white;
             yield return new WaitForSeconds(.1f);
         }
-        invincibleState = !invincibleState;
+        //invincibleState = !invincibleState;
     }
 }

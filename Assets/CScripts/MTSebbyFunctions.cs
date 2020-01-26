@@ -71,7 +71,7 @@ public class MTSebbyFunctions : MonoBehaviour
 
         if (CharInputEngine.faceRight) //CHECK FLIP
         {
-            b.GetComponent<Rigidbody2D>().velocity = transform.right * 80;
+            b.GetComponent<Rigidbody2D>().velocity = transform.right * 70;
         }
         else
         {
@@ -79,7 +79,7 @@ public class MTSebbyFunctions : MonoBehaviour
             theScale.x *= -1;
             b.transform.localScale = theScale; //flip sprite
 
-            b.GetComponent<Rigidbody2D>().velocity = -transform.right * 80;
+            b.GetComponent<Rigidbody2D>().velocity = -transform.right * 70;
         }
 
     }
@@ -89,12 +89,12 @@ public class MTSebbyFunctions : MonoBehaviour
         SpriteRenderer sprite = b.GetComponent<SpriteRenderer>();
         Vector3 sizechange = new Vector3(1, 1, 1);
         float vectorx = 1, vectory = 1;
-        for (int i = 0; i < 300; i++)
+        for (int i = 0; i < 50; i++)
         {
             
             Time.timeScale = 0;
-            sizechange.x = (float)vectorx*i / 60;
-            sizechange.y = (float)vectory*i / 60;
+            sizechange.x = (float)vectorx*i / 10;
+            sizechange.y = (float)vectory*i / 10;
             b.transform.localScale = sizechange;
             //SpriteRenderer.color = Color.red;
             //yield return new WaitForSeconds(.1f);
