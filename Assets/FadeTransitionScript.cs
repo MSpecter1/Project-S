@@ -5,10 +5,12 @@ using UnityEngine;
 public class FadeTransitionScript : MonoBehaviour
 {
     public Animator fadeanimator;
+    public GameObject fade;
 
     // Start is called before the first frame update
     void Start()
     {
+        fade.SetActive(true);
         FadeIn();
     }
 

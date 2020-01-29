@@ -44,21 +44,31 @@ public class CharHPManager : MonoBehaviour
         //UPDATE HEALTH BAR DISPLAY
         floathp = (float)CharHP / CharMaxHP;
         healthbar.setSize(floathp);
-        //IF HP IS BELOW 20% START FLASHING RED
-        if (!healthbar.lowHP && floathp < 0.2f)
+        
+        if (!deadState && CharHP <= 0)
         {
-            healthbar.startFlashing();
+            PlayerDied();
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (Input.GetKeyDown("m"))
+        {
+            resetChar();
         }
     }
 
     public void setHP(int hp)
     {
-        CharHP = hp;
-        CharMaxHP = CharHP;
+        CharMaxHP = hp;
+        CharHP = CharMaxHP;
     }
 
     public void resetChar()
     {
+        PlayerRevive(CharMaxHP);
+        Debug.Log("CHAR RESET");
         if (transform.name=="P1Char")
         { 
             transform.position = GameObject.Find("CSSScriptsObject").GetComponent<CharLoaderScript>().p1start; 
@@ -67,10 +77,6 @@ public class CharHPManager : MonoBehaviour
         { 
             transform.position = GameObject.Find("CSSScriptsObject").GetComponent<CharLoaderScript>().p2start; 
         }
-        CharHP = CharMaxHP;
-        deadState = false;
-        invincibleState = false;
-
 }
 
     public void PlayerDied()
@@ -81,6 +87,15 @@ public class CharHPManager : MonoBehaviour
         deadState = true;
         invincibleState = true;
         CharInputEngine.animator.SetBool("deadState", true);
+    }
+
+    public void PlayerRevive(int revivehp)
+    {
+        GameObject.Find("RoundManager").GetComponent<RoundManager>().setAlive(gameObject);
+        CharHP = revivehp;
+        deadState = false;
+        invincibleState = false;
+        CharInputEngine.animator.SetBool("deadState", false);
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -104,15 +119,12 @@ public class CharHPManager : MonoBehaviour
             {
                 CharHP -= 1000;
             }
-            if (CharHP <= 0)
-            {
-                PlayerDied();
-            }
 
             //TEMPORARY CODE, EACH UNIQUE HIT SHOULD HAVE DIFFERENT LAUNCH FORCE
             //HITTER SHOULD BE THE ONE THAT CAUSES "OTHER" TO GO FLYING
             m_Rigidbody2D.velocity = new Vector2(LaunchDirection, 1) * 10f;
         }
+
     }
 
     IEnumerator FlashDamageTaken()

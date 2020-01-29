@@ -8,6 +8,7 @@ public class HealthBar : MonoBehaviour
     public Transform bar;
     public Vector3 testvector;
     public bool lowHP=false;
+    public bool flashing;
     void Start()
     {
         bar = transform.Find("Bar");
@@ -26,6 +27,15 @@ public class HealthBar : MonoBehaviour
 
     public void setSize(float sizeNormalized) //float = {0 -> 1} for % of how much the health bar is filled
     {
+        if (sizeNormalized<=0.2)
+        {
+            lowHP = true;
+            startFlashing();
+        }
+        else
+        {
+            lowHP = false;
+        }
         testvector = new Vector3(sizeNormalized, 1f, 1f);
         bar.localScale = testvector;
     }
@@ -35,10 +45,17 @@ public class HealthBar : MonoBehaviour
         bar.Find("BarSprite").GetComponent<SpriteRenderer>().color = color;
     }
 
+    public void setHPBarBool(bool state)
+    {
+        lowHP = state;
+    }
     public void startFlashing()
     {
-        lowHP = true;
-        StartCoroutine(FlashHealthBar());
+        if (!flashing)
+        {
+            flashing = true;
+            StartCoroutine(FlashHealthBar());
+        }
     }
 
     IEnumerator FlashHealthBar()
@@ -50,5 +67,6 @@ public class HealthBar : MonoBehaviour
             setColor(Color.white);
             yield return new WaitForSeconds(.2f);
         }
+        flashing = false;
     }
 }

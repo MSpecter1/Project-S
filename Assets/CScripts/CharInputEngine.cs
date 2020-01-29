@@ -32,16 +32,6 @@ public class CharInputEngine: MonoBehaviour
 
     //Input buffer vector, discard actions after a time, 
 
-    void Awake()
-    {
-        
-    }
-
-    void OnEnable()
-    {
-        
-    }
-    
     void Start()
     {
         faceRight = true;
