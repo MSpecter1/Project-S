@@ -136,29 +136,39 @@ public class RoundManager : MonoBehaviour
         if (winner == "P1")
         {
             GameObject P1WCounter = Instantiate(WinCounter) as GameObject;
-            P1WCounter.transform.parent = canvas.transform;//P1CounterGroup.transform;
-            if (P1WonRounds>1)
-            {
-                Vector3 newPostion = new Vector3(P1WCounter.transform.localPosition.x-(P1WonRounds-1)*50, 0, 0);
-                P1WCounter.transform.localPosition = newPostion;
-            }
+            P1WCounter.transform.SetParent(P1CounterGroup.transform, false);
+            setWCounterPos(P1WCounter, P1WonRounds, "P1");
+          
         }
         else if (winner == "P2")
         {
             GameObject P2WCounter = Instantiate(WinCounter) as GameObject;
-            P2WCounter.transform.parent = P2CounterGroup.transform;
-            if (P2WonRounds > 1)
-            {
-                Vector3 newPostion = new Vector3(P2WCounter.transform.localPosition.x + (P1WonRounds - 1) * 50, 0, 0);
-                P2WCounter.transform.localPosition = newPostion;
-            }
+            P2WCounter.transform.SetParent(P2CounterGroup.transform, false);
+            setWCounterPos(P2WCounter, P2WonRounds, "P2");
         }
         else if (winner == "draw")
         {
             GameObject P1WCounter = Instantiate(WinCounter) as GameObject;
+            P1WCounter.transform.SetParent(P1CounterGroup.transform, false);
             GameObject P2WCounter = Instantiate(WinCounter) as GameObject;
-            P1WCounter.transform.parent = P1CounterGroup.transform;
-            P2WCounter.transform.parent = P2CounterGroup.transform;
+            P2WCounter.transform.SetParent(P2CounterGroup.transform, false);
+
+            setWCounterPos(P1WCounter, P1WonRounds, "P1");
+            setWCounterPos(P2WCounter, P2WonRounds, "P2");
+        }
+    }
+
+    private void setWCounterPos(GameObject counter ,int roundswon, string player)
+    {
+        if (P1WonRounds > 1 && player=="P1")
+        {
+            Vector3 newPostion = new Vector3(counter.transform.localPosition.x - (P1WonRounds - 1) * 50, counter.transform.localPosition.y, counter.transform.localPosition.z);
+            counter.transform.localPosition = newPostion;
+        }
+        else if (P1WonRounds > 1 && player == "P2")
+        {
+            Vector3 newPostion = new Vector3(counter.transform.localPosition.x + (P1WonRounds - 1) * 50, counter.transform.localPosition.y, counter.transform.localPosition.z);
+            counter.transform.localPosition = newPostion;
         }
     }
 
