@@ -15,7 +15,7 @@ public class CharLoaderScript : MonoBehaviour
     public GameObject P2Char;
 
     // Start is called before the first frame update\
-    void Start()
+    void Awake()
     {
         if (cmanager.selected)
         {
@@ -51,7 +51,7 @@ public class CharLoaderScript : MonoBehaviour
         targetGroup.m_Targets.SetValue(target2, 1);
         return;
 
-        
+     
     }
 
 }
