@@ -13,6 +13,7 @@ public class CharInputEngine: MonoBehaviour
     public MoveController mControl;
     public Animator animator;
     public PlayerInput playerInput;
+    public CharEXManager exmanager;
 
     public string PlayerName;
     public bool faceRight;
@@ -162,7 +163,11 @@ public class CharInputEngine: MonoBehaviour
 
     void OnSpecialAttack()
     {
+
+        if (exmanager.UseEX(100))
+        {
             animator.SetTrigger("specialAttack1");
+        }
     }
 
     //NON-INPUT FUNCTIONS

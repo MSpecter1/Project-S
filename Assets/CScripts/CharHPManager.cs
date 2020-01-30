@@ -53,10 +53,10 @@ public class CharHPManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown("m"))
-        {
-            resetChar();
-        }
+        //if (Input.GetKeyDown("m"))
+        //{
+        //    resetChar();
+        //}
     }
 
     public void setHP(int hp)

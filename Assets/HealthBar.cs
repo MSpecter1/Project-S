@@ -40,6 +40,11 @@ public class HealthBar : MonoBehaviour
         bar.localScale = testvector;
     }
 
+    public float getSize()
+    {
+        return bar.localScale.x;
+    }
+
     public void setColor(Color color)
     {
         bar.Find("BarSprite").GetComponent<SpriteRenderer>().color = color;

@@ -8,6 +8,7 @@ public class MTSebbyFunctions : MonoBehaviour
 {
     public CharInputEngine CharInputEngine;
     public CharHPManager hpmanager;
+    public CharEXManager exmanager;
 
     public Animator animator;
 

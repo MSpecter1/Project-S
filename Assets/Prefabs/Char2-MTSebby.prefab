@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 6450862796945947988}
   - component: {fileID: 40444152090840125}
   - component: {fileID: 3042527162626565502}
+  - component: {fileID: 3706067296445339409}
   m_Layer: 9
   m_Name: Char2-MTSebby
   m_TagString: Untagged
@@ -115,6 +116,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -216,13 +218,9 @@ MonoBehaviour:
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: MoveController+BoolEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!114 &1004449837331179068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,13 +240,9 @@ MonoBehaviour:
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.InputSystem.PlayerInput+DeviceLostEvent, Unity.InputSystem,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_DeviceRegainedEvent:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.InputSystem.PlayerInput+DeviceRegainedEvent, Unity.InputSystem,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
@@ -270,6 +264,7 @@ MonoBehaviour:
   mControl: {fileID: 222833959046851781}
   animator: {fileID: 222833959046851783}
   playerInput: {fileID: 1004449837331179068}
+  exmanager: {fileID: 3706067296445339409}
   PlayerName: 
   faceRight: 0
   MoveSpeed: 100
@@ -289,6 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharInputEngine: {fileID: 6450862796945947988}
   hpmanager: {fileID: 3042527162626565502}
+  exmanager: {fileID: 3706067296445339409}
   animator: {fileID: 222833959046851783}
   FireballStartLoc: {fileID: 8712086288024856391}
   ultFireballStartLoc: {fileID: 8131818432279814209}
@@ -313,6 +309,24 @@ MonoBehaviour:
   invincibleState: 0
   healthbar: {fileID: 0}
   floathp: 0
+--- !u!114 &3706067296445339409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222833959046851789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f731fa655c14c4db45cbaeed3fdbdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharInputEngine: {fileID: 6450862796945947988}
+  CharEX: 0
+  CharMaxEX: 500
+  PoweredState: 0
+  EXbar: {fileID: 0}
+  floatEX: 0
 --- !u!1 &2286605141171088000
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,6 +780,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -973,6 +988,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
