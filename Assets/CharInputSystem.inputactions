@@ -17,7 +17,7 @@
                     "name": "MoveRight",
                     "type": "Button",
                     "id": "0fd3956d-418b-4eb2-8905-ce1d96493b5f",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
@@ -924,7 +924,7 @@
             "id": "006fa013-2106-42db-9641-15d068afdc24",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "UISelect",
                     "type": "Button",
                     "id": "f14e3c8f-3df7-4dfc-a2f1-a0f212560b3d",
                     "expectedControlType": "",
@@ -936,11 +936,11 @@
                 {
                     "name": "",
                     "id": "1aed354b-7202-47db-9b3b-b33ed06b8600",
-                    "path": "",
+                    "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "UISelect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

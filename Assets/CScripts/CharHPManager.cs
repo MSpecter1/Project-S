@@ -7,11 +7,11 @@ using UnityEngine;
 //Manages getting hit and launches etc
 //ADD IS HIT BOOLEAN AND CALCULATE LAUNCH DISTANCE BASED ON ATTACK
 
-
 public class CharHPManager : MonoBehaviour
 {
     private Rigidbody2D m_Rigidbody2D;
     public CharInputEngine CharInputEngine;
+    public CharStateManager CharStateManager;
     
     //HP MANAGERMENT VARIABLES
     public int CharHP;
@@ -122,7 +122,7 @@ public class CharHPManager : MonoBehaviour
 
             //TEMPORARY CODE, EACH UNIQUE HIT SHOULD HAVE DIFFERENT LAUNCH FORCE
             //HITTER SHOULD BE THE ONE THAT CAUSES "OTHER" TO GO FLYING
-            m_Rigidbody2D.velocity = new Vector2(LaunchDirection, 1) * 10f;
+            //m_Rigidbody2D.velocity = new Vector2(LaunchDirection, 1) * 10f;
         }
 
     }

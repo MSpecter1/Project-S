@@ -31,18 +31,17 @@ public class CharEXManager : MonoBehaviour
         }
         //EXbar.setSize(CharEX/CharMaxEX);
         CharEX = CharMaxEX;
-        EXbar.setSize(CharMaxEX/CharMaxEX);
-
     }
 
     void Update()
     {
-        
+        floatEX = (float)CharEX / CharMaxEX;
+        EXbar.setSize(floatEX);
     }
 
     public bool UseEX(int EXAmount)
     {
-        if (EXAmount>=CharEX && CharEX!=0) //if there is enough EX and it is not 0
+        if (EXAmount<=CharEX && CharEX!=0) //if there is enough EX and it is not 0
         {
             CharEX -= EXAmount;
             return true;

@@ -14,10 +14,11 @@ public class CharInputEngine: MonoBehaviour
     public Animator animator;
     public PlayerInput playerInput;
     public CharEXManager exmanager;
+    public CharStateManager CharStateManager;
+    //TEMP
+    public CharAudioManager CharAudio;
 
-    public string PlayerName;
     public bool faceRight;
-    private bool blockState = false;
     private bool jumpState = false;
     private bool crouchState = false;
 
@@ -25,9 +26,6 @@ public class CharInputEngine: MonoBehaviour
     private float horizantalMove=0f;
 
     public bool isGrounded;
-    private bool inHitStun;
-    private bool inBlockStun;
-    private bool inRecovery;
 
     public Transform target;
 
@@ -46,13 +44,11 @@ public class CharInputEngine: MonoBehaviour
         if (transform.name=="P1Char")
         {
             target = GameObject.Find("P2Char").transform;
-            PlayerName = "P1Char";
             
         }
         else
         {
             target = GameObject.Find("P1Char").transform;
-            PlayerName = "P2Char";
         }
         
         //ENABLE CONTROLS
@@ -67,11 +63,34 @@ public class CharInputEngine: MonoBehaviour
 
     }
 
+    public void EnableControls(bool input) //ENABLES OR DISABLE MOVING/ATTACKING
+    {
+        if (input)
+        {
+            playerInput.currentActionMap.Enable();
+        }
+        else
+        {
+            playerInput.currentActionMap.Disable();
+        }
+    }
+
     void FixedUpdate()
     {
+
         //MOVE
         GetMoveValue();
         mControl.Move(horizantalMove * Time.fixedDeltaTime, crouchState, jumpState); //move character
+
+        //SET STATES
+        if (horizantalMove!=0)
+        {
+            CharStateManager.setState(CharStateManager.CharState.WalkState);
+        }
+        else
+        {
+            CharStateManager.setState(CharStateManager.CharState.IdleState);
+        }
 
         //FACE OTHER PLAYER
         if (target.position.x > transform.position.x && !faceRight) //if the target is to the right of enemy and the enemy is not facing right
@@ -81,16 +100,6 @@ public class CharInputEngine: MonoBehaviour
 
         //MAKE JUMP FALSE
         jumpState = false;
-    }
-
-    void OnMenu()
-    {
-
-    }
-
-    void OnSelect()
-    {
-
     }
 
     //MOVEMENT
@@ -148,7 +157,6 @@ public class CharInputEngine: MonoBehaviour
     void OnNAttackLight()
     {
             animator.SetTrigger("lightNormal");
-
     }
 
     void OnNAttackMedium()
@@ -163,7 +171,6 @@ public class CharInputEngine: MonoBehaviour
 
     void OnSpecialAttack()
     {
-
         if (exmanager.UseEX(100))
         {
             animator.SetTrigger("specialAttack1");
@@ -181,6 +188,11 @@ public class CharInputEngine: MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    public void PlaySoundClip(string soundname)
+    {
+        CharAudio.PlaySound(soundname);
     }
 
 }

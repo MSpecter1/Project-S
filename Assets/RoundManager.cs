@@ -206,6 +206,8 @@ public class RoundManager : MonoBehaviour
     {
         P1HP.resetChar();
         P2HP.resetChar();
+        GameObject.Find("P1Char").GetComponent<CharInputEngine>().EnableControls(false);
+        GameObject.Find("P2Char").GetComponent<CharInputEngine>().EnableControls(false);
 
         fadeanimator.GetComponent<FadeTransitionScript>().FadeIn();
         yield return new WaitForSeconds(fadeanimator.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
@@ -214,6 +216,8 @@ public class RoundManager : MonoBehaviour
         announcerText.gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(1);
         announcerText.text = "FIGHT";
+        GameObject.Find("P1Char").GetComponent<CharInputEngine>().EnableControls(true);
+        GameObject.Find("P2Char").GetComponent<CharInputEngine>().EnableControls(true);
         yield return new WaitForSecondsRealtime(1);
         announcerText.gameObject.SetActive(false);
         //Time.timeScale = 1;

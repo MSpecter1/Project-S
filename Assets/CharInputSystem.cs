@@ -30,7 +30,7 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
                     ""name"": ""MoveRight"",
                     ""type"": ""Button"",
                     ""id"": ""0fd3956d-418b-4eb2-8905-ce1d96493b5f"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -937,7 +937,7 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
             ""id"": ""006fa013-2106-42db-9641-15d068afdc24"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""UISelect"",
                     ""type"": ""Button"",
                     ""id"": ""f14e3c8f-3df7-4dfc-a2f1-a0f212560b3d"",
                     ""expectedControlType"": """",
@@ -949,11 +949,11 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1aed354b-7202-47db-9b3b-b33ed06b8600"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""UISelect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1014,7 +1014,7 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
         m_FGInputsController1_Select = m_FGInputsController1.FindAction("Select", throwIfNotFound: true);
         // MenuUIInputs
         m_MenuUIInputs = asset.FindActionMap("MenuUIInputs", throwIfNotFound: true);
-        m_MenuUIInputs_Newaction = m_MenuUIInputs.FindAction("New action", throwIfNotFound: true);
+        m_MenuUIInputs_UISelect = m_MenuUIInputs.FindAction("UISelect", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1500,12 +1500,12 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
     // MenuUIInputs
     private readonly InputActionMap m_MenuUIInputs;
     private IMenuUIInputsActions m_MenuUIInputsActionsCallbackInterface;
-    private readonly InputAction m_MenuUIInputs_Newaction;
+    private readonly InputAction m_MenuUIInputs_UISelect;
     public struct MenuUIInputsActions
     {
         private @CharInputSystem m_Wrapper;
         public MenuUIInputsActions(@CharInputSystem wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_MenuUIInputs_Newaction;
+        public InputAction @UISelect => m_Wrapper.m_MenuUIInputs_UISelect;
         public InputActionMap Get() { return m_Wrapper.m_MenuUIInputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1515,16 +1515,16 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_MenuUIInputsActionsCallbackInterface != null)
             {
-                @Newaction.started -= m_Wrapper.m_MenuUIInputsActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_MenuUIInputsActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_MenuUIInputsActionsCallbackInterface.OnNewaction;
+                @UISelect.started -= m_Wrapper.m_MenuUIInputsActionsCallbackInterface.OnUISelect;
+                @UISelect.performed -= m_Wrapper.m_MenuUIInputsActionsCallbackInterface.OnUISelect;
+                @UISelect.canceled -= m_Wrapper.m_MenuUIInputsActionsCallbackInterface.OnUISelect;
             }
             m_Wrapper.m_MenuUIInputsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
+                @UISelect.started += instance.OnUISelect;
+                @UISelect.performed += instance.OnUISelect;
+                @UISelect.canceled += instance.OnUISelect;
             }
         }
     }
@@ -1585,6 +1585,6 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
     }
     public interface IMenuUIInputsActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnUISelect(InputAction.CallbackContext context);
     }
 }
