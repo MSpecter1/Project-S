@@ -29,12 +29,13 @@ public class MTSebbyFunctions : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other) //Check if ANY hitbox attacks a hurtbox
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Hurtbox")) //IF HITTING ENEMY HURTBOX
         {
-            Debug.Log("normal attack landed a hit");
+            Debug.Log(gameObject.name + ": normal attack landed a hit");
         }
+
     }
 
     public void LaunchHadouken() //SPECIAL ATTACK 1

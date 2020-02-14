@@ -65,6 +65,11 @@ public class CharHPManager : MonoBehaviour
         CharHP = CharMaxHP;
     }
 
+    public void damageHP(int damage)
+    {
+        CharHP -= damage;
+    }
+
     public void resetChar()
     {
         PlayerRevive(CharMaxHP);

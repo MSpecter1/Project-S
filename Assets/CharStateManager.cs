@@ -25,7 +25,7 @@ public class CharStateManager : MonoBehaviour
         BlockState,
         BlockStunState,
         HitStunState,
-        //MISC
+        //MISC MAYBE CHANGE TO MODIFIER BOOLS???
         PoweredState,
         StunnedState,
         DeadState,
