@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121039628518895896}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4225731, y: 0.006795883, z: 19.268406}
+  m_LocalPosition: {x: 0.86, y: 0.66, z: 19.268406}
   m_LocalScale: {x: 2.5580838, y: 1.7141799, z: 2.6371999}
   m_Children: []
   m_Father: {fileID: 2078484122068778603}
@@ -288,10 +288,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1931068cc69032479b1f910f9693f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 222833959046851783}
   CharInputEngine: {fileID: 6450862796945947988}
   hpmanager: {fileID: 3042527162626565502}
   exmanager: {fileID: 3706067296445339409}
-  animator: {fileID: 222833959046851783}
   FireballStartLoc: {fileID: 8712086288024856391}
   ultFireballStartLoc: {fileID: 8131818432279814209}
   HadoukenFire: {fileID: 5996409647713253403, guid: afc61cd8a4792604ba0cfd61281efe70,
@@ -309,12 +309,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharInputEngine: {fileID: 6450862796945947988}
-  CharStateManager: {fileID: 0}
+  CharStateManager: {fileID: 8741711514858778844}
   CharHP: 10000
   CharMaxHP: 0
   deadState: 0
   invincibleState: 0
   healthbar: {fileID: 0}
+  SpriteRenderer: {fileID: 222833959046851787}
   floathp: 0
 --- !u!114 &3706067296445339409
 MonoBehaviour:
@@ -333,6 +334,7 @@ MonoBehaviour:
   CharMaxEX: 500
   PoweredState: 0
   EXbar: {fileID: 0}
+  SpriteRenderer: {fileID: 222833959046851787}
   floatEX: 0
 --- !u!114 &8741711514858778844
 MonoBehaviour:
@@ -485,6 +487,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8526b5434540d6241b879c8452c9f509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  thisAttackType: 0
+  thisAttackLaunchType: 0
+  framesOnHit: 0
+  framesOnBlock: 0
+  lightCancellable: 0
+  mediumCancellable: 0
+  heavyCancellable: 0
+  abilityCancellable: 0
 --- !u!1 &5026030164119379415
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +597,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.2209056, y: 2.454587}
+  m_Offset: {x: -0.2209056, y: -0.13960838}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -597,7 +608,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9383582, y: 4.88389}
+  m_Size: {x: 2.4471521, y: 10.072281}
   m_EdgeRadius: 0
 --- !u!1 &6410949886687641338
 GameObject:
@@ -669,6 +680,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8526b5434540d6241b879c8452c9f509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  thisAttackType: 0
+  thisAttackLaunchType: 0
+  framesOnHit: 0
+  framesOnBlock: 0
+  lightCancellable: 0
+  mediumCancellable: 0
+  heavyCancellable: 0
+  abilityCancellable: 0
 --- !u!1 &7529122160032250902
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,6 +792,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8526b5434540d6241b879c8452c9f509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  thisAttackType: 0
+  thisAttackLaunchType: 0
+  framesOnHit: 0
+  framesOnBlock: 0
+  lightCancellable: 0
+  mediumCancellable: 0
+  heavyCancellable: 0
+  abilityCancellable: 0
 --- !u!1 &7937156158587308158
 GameObject:
   m_ObjectHideFlags: 0

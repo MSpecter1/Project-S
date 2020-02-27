@@ -81,7 +81,7 @@ public class MoveController : MonoBehaviour
         return false;
     }
    
-    public void Move(float move, bool crouch, bool jump)
+    public void Move(float move, bool crouch, bool jump, bool forwards)
     {
         //only control the player if grounded or airControl is turned on
         if (m_Grounded || m_AirControl)
@@ -116,7 +116,16 @@ public class MoveController : MonoBehaviour
                 }
             }
             // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+            Vector3 targetVelocity;
+            if (forwards)
+            {
+                targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+            }
+            else
+            {
+                targetVelocity = new Vector2(move*0.5f * 10f, m_Rigidbody2D.velocity.y);
+            }
+            
             // And then smoothing it out and applying it to the character
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
         }

@@ -14,7 +14,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "MoveRight",
+                    "name": "DashRight",
                     "type": "Button",
                     "id": "0fd3956d-418b-4eb2-8905-ce1d96493b5f",
                     "expectedControlType": "Button",
@@ -22,7 +22,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "MoveLeft",
+                    "name": "DashLeft",
                     "type": "Button",
                     "id": "62375a01-588f-4af3-9c76-0f7efa170860",
                     "expectedControlType": "",
@@ -92,6 +92,22 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "MoveRight",
+                    "type": "Button",
+                    "id": "de2c2203-ac32-4a6b-acdb-7c010e5db29a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MoveLeft",
+                    "type": "Button",
+                    "id": "06d767ea-a3ff-4f6a-84ac-c17d725774d3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -99,10 +115,10 @@
                     "name": "",
                     "id": "3f34be3c-911b-4b20-b8d8-445679a78388",
                     "path": "<Keyboard>/d",
-                    "interactions": "",
+                    "interactions": "MultiTap",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveRight",
+                    "action": "DashRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -110,10 +126,10 @@
                     "name": "",
                     "id": "ea88242b-321d-4dfe-9eb0-121b32633d8a",
                     "path": "<Keyboard>/a",
-                    "interactions": "",
+                    "interactions": "MultiTap",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveLeft",
+                    "action": "DashLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -259,6 +275,28 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "974a6199-a086-49d8-ac65-5835ecf3e4d7",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "32d297f3-34ac-45ba-935a-590b3ce10a3c",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

@@ -5,8 +5,11 @@ using UnityEngine;
 public class GeneralFireball : MonoBehaviour
 {
     // Start is called before the first frame update
+    private int damage;
+    private int framesOnBlock;
+    private int framesOnHit;
+    private GameObject user;
 
-    private bool isUlt;
     void Start()
     {
         
@@ -18,34 +21,55 @@ public class GeneralFireball : MonoBehaviour
     
     }
 
-    public bool getUlt()
+    private void OnDestroy()
     {
-        return isUlt;
+        user.GetComponent<CharFunctions>().ProjectileActive = false;
     }
 
-    public void setUlt(bool bl)
+    public void setDmg(int val)
     {
-        isUlt = bl;
+        damage = val;
+    }
+
+    public void setUser(GameObject fired)
+    {
+        user = fired;
+    }
+
+    public void setFramesOnBlock(int frames)
+    {
+        framesOnBlock = frames;
+    }
+    public void setFramesOnHit(int frames)
+    {
+        framesOnHit = frames;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (isUlt)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Hurtbox")) //IF HITTING ENEMY
         {
-            StartCoroutine(MeatyFireball());
+            GameObject otherChar = other.transform.parent.parent.gameObject;
+            CharHPManager otherHP = otherChar.GetComponent<CharHPManager>();
+            CharStateManager otherState = otherChar.GetComponent<CharStateManager>();
+
+            if (!otherState.isBlocking() && otherState.getState() != CharStateManager.CharState.DeadState) //if hitting unguarded enemy
+            {
+                Debug.Log(gameObject.name + ": landed a hit");
+                otherHP.damageHP(damage);
+                otherState.StartHitStun(framesOnHit);
+
+            }
+            else if (otherState.isBlocking() && otherState.getState() != CharStateManager.CharState.DeadState)//hit guarded enemy
+            {
+                otherState.StartBlockStun(framesOnBlock);
+            }
+            Destroy(gameObject);
+
         }
         else
         {
             Destroy(gameObject);
         }
-    }
-    IEnumerator MeatyFireball()
-    {
-        SpriteRenderer SpriteRenderer;
-        for (int i = 0; i <100; i++)
-        {
-            yield return null;
-        }
-        Destroy(gameObject);
     }
 }

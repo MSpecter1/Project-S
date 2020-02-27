@@ -9,6 +9,7 @@ public class CharStateManager : MonoBehaviour
     public CharInputEngine CharInputEngine;
 
     public bool FacingRight;
+    public bool Blocking = false;
     public enum CharState
     {
         //MOVEMENT
@@ -22,7 +23,6 @@ public class CharStateManager : MonoBehaviour
         AttackActiveState,
         AttackRecoveryState,
         //DEFENSE
-        BlockState,
         BlockStunState,
         HitStunState,
         //MISC MAYBE CHANGE TO MODIFIER BOOLS???
@@ -42,11 +42,18 @@ public class CharStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (ActiveState!=CharState.HitStunState|| ActiveState != CharState.BlockStunState)
+        {
+            animator.SetBool("BlockStunState", false);
+            animator.SetBool("HitStunState", false);
+            CharHPManager.SpriteRenderer.color = Color.white;
+        }
         switch (ActiveState)
         {
             //MOVEMENT
             case CharState.IdleState:
                 {
+                    
                     animator.SetBool("WalkState", false);
                 }
                 break;
@@ -59,26 +66,26 @@ public class CharStateManager : MonoBehaviour
 
             case CharState.AirState:
                 {
-
+                    
                 }
                 break;
 
             case CharState.CrouchState:
                 {
-
+                    animator.SetBool("CrouchState", true);
                 }
                 break;
 
             //ATTACK
             case CharState.AttackStartupState:
                 {
-                    animator.SetBool("WalkState", false);
+                   
                 }
                 break;
 
             case CharState.AttackActiveState:
                 {
-                    animator.SetBool("WalkState", true);
+                    
                 }
                 break;
 
@@ -89,20 +96,17 @@ public class CharStateManager : MonoBehaviour
                 break;
 
             //DEFENSE
-            case CharState.BlockState:
-                {
-
-                }
-                break;
             case CharState.BlockStunState:
                 {
-                    animator.SetBool("WalkState", true);
+                    CharHPManager.SpriteRenderer.color = Color.blue;
+                    animator.SetBool("BlockStunState", true);
                 }
                 break;
 
             case CharState.HitStunState:
                 {
-
+                    CharHPManager.SpriteRenderer.color = Color.red;
+                    animator.SetBool("HitStunState", true);
                 }
                 break;
 
@@ -131,5 +135,41 @@ public class CharStateManager : MonoBehaviour
         ActiveState = CharState.IdleState;
     }
 
+    public bool isBlocking()
+    {
+        return Blocking;
+    }
 
+    public void StartBlockStun(int frames)
+    {
+        StartCoroutine(BlockStunned(frames));
+    }
+
+    public void StartHitStun(int frames)
+    {
+        StartCoroutine(HitStunned(frames));
+    }
+
+    IEnumerator HitStunned(int frameCount)
+    {
+        setState(CharStateManager.CharState.HitStunState);
+        yield return StartCoroutine(WaitForFrames(frameCount));
+        setState(CharStateManager.CharState.IdleState);
+        
+    }
+    IEnumerator BlockStunned(int frameCount)
+    {
+        setState(CharStateManager.CharState.BlockStunState);
+        yield return StartCoroutine(WaitForFrames(frameCount));
+        setState(CharStateManager.CharState.IdleState);
+        CharHPManager.SpriteRenderer.color = Color.white;
+    }
+    IEnumerator WaitForFrames(int frameCount)
+    {
+        while (frameCount > 0)
+        {
+            frameCount--;
+            yield return null;
+        }
+    }
 }

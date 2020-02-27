@@ -13,7 +13,7 @@ public class CharEXManager : MonoBehaviour
 
     public bool PoweredState = false;
     public HealthBar EXbar;
-    SpriteRenderer SpriteRenderer;
+    public SpriteRenderer SpriteRenderer;
 
     public float floatEX;
 

@@ -20,7 +20,7 @@ public class CharHPManager : MonoBehaviour
     public bool deadState = false;
     public bool invincibleState = false;
     public HealthBar healthbar;
-    SpriteRenderer SpriteRenderer;
+    public SpriteRenderer SpriteRenderer;
 
     public float floathp;
 
@@ -67,7 +67,15 @@ public class CharHPManager : MonoBehaviour
 
     public void damageHP(int damage)
     {
-        CharHP -= damage;
+        //StartCoroutine(FlashDamageTaken());
+        if (CharHP - damage <= 0)
+        {
+            CharHP = 0;
+        }
+        else if (CharHP > 0)
+        {
+            CharHP -= damage;
+        }
     }
 
     public void resetChar()
@@ -114,30 +122,14 @@ public class CharHPManager : MonoBehaviour
         {
             LaunchDirection = 1;
         }
-
-        // TEMPORARY REMOVE LATER
-        if ((col.gameObject.layer == LayerMask.NameToLayer("Hitbox") || col.gameObject.layer == LayerMask.NameToLayer("ProjectileHitbox")) && !invincibleState) //IF HIT BY HITBOX FROM ENEMY ATTACK
-        {
-            Debug.Log("HIT");
-            StartCoroutine(FlashDamageTaken());
-            if (CharHP>0)
-            {
-                CharHP -= 1000;
-            }
-
-            //TEMPORARY CODE, EACH UNIQUE HIT SHOULD HAVE DIFFERENT LAUNCH FORCE
-            //HITTER SHOULD BE THE ONE THAT CAUSES "OTHER" TO GO FLYING
-            //m_Rigidbody2D.velocity = new Vector2(LaunchDirection, 1) * 10f;
-        }
-
     }
 
+    
     IEnumerator FlashDamageTaken()
     {
         //invincibleState = !invincibleState;
         for (int i = 0; i < 4; i++)
         {
-            SpriteRenderer = GetComponent<SpriteRenderer>();
             SpriteRenderer.color = Color.red;
             yield return new WaitForSeconds(.1f);
             SpriteRenderer.color = Color.white;
