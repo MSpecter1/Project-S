@@ -55,7 +55,7 @@ public class GeneralFireball : MonoBehaviour
 
             if (!otherState.isBlocking() && otherState.getState() != CharStateManager.CharState.DeadState) //if hitting unguarded enemy
             {
-                Debug.Log(gameObject.name + ": landed a hit");
+                //Debug.Log(gameObject.name + ": landed a hit");
                 otherHP.damageHP(damage);
                 otherState.StartHitStun(framesOnHit);
 

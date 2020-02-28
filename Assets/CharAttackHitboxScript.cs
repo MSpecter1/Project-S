@@ -49,7 +49,7 @@ public class CharAttackHitboxScript : MonoBehaviour
 
     public void hitConfirm()
     {
-        BoxCollider2D.OverlapCollider(LayerMask.NameToLayer("Hurtbox"), collidersHit);
+        //BoxCollider2D.OverlapCollider(LayerMask.NameToLayer("Hurtbox"), collidersHit);
 
     }
 
@@ -64,7 +64,7 @@ public class CharAttackHitboxScript : MonoBehaviour
 
             if (otherState.isBlocking() != true && otherState.getState() != CharStateManager.CharState.DeadState) //if hitting unguarded enemy
             {
-                Debug.Log(gameObject.name + ": landed a hit");
+               // Debug.Log(gameObject.name + ": landed a hit");
                 otherHP.damageHP(attackDamage);
                 otherState.StartHitStun(framesOnHit);
 

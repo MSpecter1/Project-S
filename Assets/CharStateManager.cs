@@ -29,7 +29,6 @@ public class CharStateManager : MonoBehaviour
         PoweredState,
         StunnedState,
         DeadState,
-        InvincibleState,
         TauntState
     }
     public CharState ActiveState = CharState.IdleState;
@@ -42,7 +41,7 @@ public class CharStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ActiveState!=CharState.HitStunState|| ActiveState != CharState.BlockStunState)
+        if (ActiveState!=CharState.HitStunState && ActiveState != CharState.BlockStunState)
         {
             animator.SetBool("BlockStunState", false);
             animator.SetBool("HitStunState", false);
@@ -109,12 +108,17 @@ public class CharStateManager : MonoBehaviour
                     animator.SetBool("HitStunState", true);
                 }
                 break;
+            case CharState.DeadState:
+                {
+                    animator.SetBool("DeadState", true);
+                }
+                break;
 
             //MISC
 
             default:
                 {
-
+                    Debug.LogError("NO CHAR STATE ACTIVE");
                 }
                 break;
         }
@@ -132,6 +136,7 @@ public class CharStateManager : MonoBehaviour
 
     public void resetState()
     {
+        animator.SetBool("DeadState",false);
         ActiveState = CharState.IdleState;
     }
 
@@ -155,14 +160,15 @@ public class CharStateManager : MonoBehaviour
         setState(CharStateManager.CharState.HitStunState);
         yield return StartCoroutine(WaitForFrames(frameCount));
         setState(CharStateManager.CharState.IdleState);
-        
+        //CharHPManager.SpriteRenderer.color = Color.white;
+
     }
     IEnumerator BlockStunned(int frameCount)
     {
         setState(CharStateManager.CharState.BlockStunState);
         yield return StartCoroutine(WaitForFrames(frameCount));
         setState(CharStateManager.CharState.IdleState);
-        CharHPManager.SpriteRenderer.color = Color.white;
+        //CharHPManager.SpriteRenderer.color = Color.white;
     }
     IEnumerator WaitForFrames(int frameCount)
     {

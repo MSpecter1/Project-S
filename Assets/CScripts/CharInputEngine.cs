@@ -84,7 +84,7 @@ public class CharInputEngine: MonoBehaviour
 
         //MOVE
         GetMoveValue();
-        if(CharStateManager.getState()!=CharStateManager.CharState.BlockStunState)
+        if(CharStateManager.getState()!=CharStateManager.CharState.BlockStunState && CharStateManager.getState() != CharStateManager.CharState.HitStunState)
         {
             if ((faceRight && horizantalMove > 0) || (!faceRight && horizantalMove < 0))
             {

@@ -45,7 +45,7 @@ public class CharHPManager : MonoBehaviour
         floathp = (float)CharHP / CharMaxHP;
         healthbar.setSize(floathp);
         
-        if (!deadState && CharHP <= 0)
+        if (CharStateManager.getState()!=CharStateManager.CharState.DeadState && CharHP <= 0)
         {
             PlayerDied();
         }
@@ -97,18 +97,16 @@ public class CharHPManager : MonoBehaviour
         //SET ROUNDMANAGER BOOL
         GameObject.Find("RoundManager").GetComponent<RoundManager>().setDeath(gameObject);
         //SET OTHER BOOLS
-        deadState = true;
         invincibleState = true;
-        CharInputEngine.animator.SetBool("deadState", true);
+        CharStateManager.ActiveState = CharStateManager.CharState.DeadState;
     }
 
     public void PlayerRevive(int revivehp)
     {
         GameObject.Find("RoundManager").GetComponent<RoundManager>().setAlive(gameObject);
         CharHP = revivehp;
-        deadState = false;
         invincibleState = false;
-        CharInputEngine.animator.SetBool("deadState", false);
+        CharStateManager.resetState();
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -122,6 +120,7 @@ public class CharHPManager : MonoBehaviour
         {
             LaunchDirection = 1;
         }
+        Debug.Log(gameObject.name + " got hit by "+ col.name);
     }
 
     

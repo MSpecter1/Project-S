@@ -388,6 +388,7 @@ MonoBehaviour:
   mediumCancellable: 0
   heavyCancellable: 0
   abilityCancellable: 0
+  collidersHit: []
 --- !u!1 &5026030164119379415
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,6 +703,7 @@ MonoBehaviour:
   mediumCancellable: 0
   heavyCancellable: 0
   abilityCancellable: 0
+  collidersHit: []
 --- !u!1 &7363072916951909558
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,6 +901,7 @@ MonoBehaviour:
   mediumCancellable: 0
   heavyCancellable: 0
   abilityCancellable: 0
+  collidersHit: []
 --- !u!1 &7937156158587308158
 GameObject:
   m_ObjectHideFlags: 0
