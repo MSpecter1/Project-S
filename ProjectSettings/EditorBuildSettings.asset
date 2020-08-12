@@ -9,17 +9,26 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScreen.unity
     guid: bb326b33d5ed74541857f7212836aee1
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/Outdated Scenes/MainMenu.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/CSelectScreen.unity
+    path: Assets/Scenes/Outdated Scenes/CSelectScreen.unity
     guid: 4492e438f8f95aa429e91a332e776036
   - enabled: 1
-    path: Assets/Scenes/TestDevStage.unity
+    path: Assets/Scenes/Outdated Scenes/TestDevStage.unity
     guid: 66d4a82725323f04e8119c82be023f4e
   - enabled: 1
     path: Assets/Scenes/TheGrid.unity
     guid: 6f645cc7ab71c6645bd9f3ae778a9dec
+  - enabled: 1
+    path: Assets/Scenes/Outdated Scenes/MainMenuUpdated.unity
+    guid: 1e8dc4e379e1c2b49886bb42338b9bf2
+  - enabled: 1
+    path: Assets/Scenes/TheGridTestCharLoader.unity
+    guid: 59bb19d1cbf9de84faffeff74e3f77d4
+  - enabled: 1
+    path: Assets/Scenes/Arcade.unity
+    guid: 42e4e2a9a1c23dc449b527e55bd06ca1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d5e8a73cc970f8541a01f69e70209e91,
       type: 2}
