@@ -13,7 +13,6 @@ public class CharInputEngine: MonoBehaviour
     public MoveController mControl;
     public Animator animator;
     public PlayerInput playerInput;
-    public InputAction actionInput;
 
     public string PlayerName;
     public bool faceRight;
@@ -33,16 +32,6 @@ public class CharInputEngine: MonoBehaviour
 
     //Input buffer vector, discard actions after a time, 
 
-    void Awake()
-    {
-        
-    }
-
-    void OnEnable()
-    {
-        
-    }
-    
     void Start()
     {
         faceRight = true;
@@ -68,6 +57,7 @@ public class CharInputEngine: MonoBehaviour
         //ENABLE CONTROLS
 
         playerInput.currentActionMap.Disable();
+        //ADD COROUTINE for Round Manager
         if (transform.name == "P2Char")
         {
             playerInput.SwitchCurrentActionMap("FGInputsKeyboard2");
@@ -156,34 +146,23 @@ public class CharInputEngine: MonoBehaviour
 
     void OnNAttackLight()
     {
-        if (!animator.GetBool("Walking"))
-        {
             animator.SetTrigger("lightNormal");
-        }
+
     }
 
     void OnNAttackMedium()
     {
-        if (!animator.GetBool("Walking"))
-        {
             animator.SetTrigger("mediumNormal");
-        }
     }
 
     void OnNAttackHeavy()
     {
-        if (!animator.GetBool("Walking"))
-        {
             animator.SetTrigger("heavyNormal");
-        }
     }
 
     void OnSpecialAttack()
     {
-        if (!animator.GetBool("Walking"))
-        {
             animator.SetTrigger("specialAttack1");
-        }
     }
 
     //NON-INPUT FUNCTIONS

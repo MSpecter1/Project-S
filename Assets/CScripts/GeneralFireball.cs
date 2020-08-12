@@ -5,6 +5,8 @@ using UnityEngine;
 public class GeneralFireball : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    private bool isUlt;
     void Start()
     {
         
@@ -16,8 +18,34 @@ public class GeneralFireball : MonoBehaviour
     
     }
 
+    public bool getUlt()
+    {
+        return isUlt;
+    }
+
+    public void setUlt(bool bl)
+    {
+        isUlt = bl;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (isUlt)
+        {
+            StartCoroutine(MeatyFireball());
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    IEnumerator MeatyFireball()
+    {
+        SpriteRenderer SpriteRenderer;
+        for (int i = 0; i <100; i++)
+        {
+            yield return null;
+        }
         Destroy(gameObject);
     }
 }
