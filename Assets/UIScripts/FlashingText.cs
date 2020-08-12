@@ -14,7 +14,11 @@ public class FlashingText : MonoBehaviour
 
     void Awake()
     {
-      
+
+        //Turn of cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         textCount = textList.Count;
         currentColor = new Color[textCount];
         thisText = new TMP_Text[textCount];

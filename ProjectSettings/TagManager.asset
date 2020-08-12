@@ -20,7 +20,7 @@ TagManager:
   - Hitbox
   - PushBox
   - ProjectileHitbox
-  - 
+  - UI 2
   - 
   - 
   - 
@@ -41,4 +41,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Outside Cells
+    uniqueID: 2568202651
+    locked: 0
+  - name: Inner Cell
+    uniqueID: 1852121573
     locked: 0
