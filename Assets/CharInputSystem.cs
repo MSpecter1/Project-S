@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.Utilities;
 
 public class @CharInputSystem : IInputActionCollection, IDisposable
 {
-    private InputActionAsset asset;
+    public InputActionAsset asset { get; }
     public @CharInputSystem()
     {
         asset = InputActionAsset.FromJson(@"{
@@ -2039,7 +2039,6 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
     }
     public FGInputsController1Actions @FGInputsController1 => new FGInputsController1Actions(this);
 
-
     // MenuControls
     private readonly InputActionMap m_MenuControls;
     private IMenuControlsActions m_MenuControlsActionsCallbackInterface;
@@ -2070,7 +2069,6 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
         public InputAction @Submit => m_Wrapper.m_MenuControls_Submit;
         public InputAction @Navigate => m_Wrapper.m_MenuControls_Navigate;
         public InputActionMap Get() { return m_Wrapper.m_MenuControls; }
-
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
