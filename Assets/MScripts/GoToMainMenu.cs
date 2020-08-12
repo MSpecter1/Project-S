@@ -7,10 +7,9 @@ using UnityEngine;
 public class GoToMainMenu : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Debug.Log("to main menu started");
-        Screen.SetResolution(1280,720, false);
+
     }
 
     // Update is called once per frame
@@ -18,8 +17,7 @@ public class GoToMainMenu : MonoBehaviour
     {
         if (Input.anyKey)
         {
-            Debug.Log("Any key is pressed");
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("MainMenuUpdated");
         }
     }
 }
