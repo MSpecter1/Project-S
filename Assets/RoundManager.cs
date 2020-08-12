@@ -18,6 +18,9 @@ public class RoundManager : MonoBehaviour
 
     public CharHPManager P1HP;
     public CharHPManager P2HP;
+    public CharStateManager P1StateManager;
+    public CharStateManager P2StateManager;
+
     public GameObject fadeanimator;
     public GameObject canvas;
     public GameObject P1CounterGroup;
@@ -35,6 +38,8 @@ public class RoundManager : MonoBehaviour
         //SET VARIABLES
         P1HP = GameObject.Find("P1Char").GetComponent<CharHPManager>();
         P2HP = GameObject.Find("P2Char").GetComponent<CharHPManager>();
+        P1StateManager = GameObject.Find("P1Char").GetComponent<CharStateManager>();
+        P2StateManager = GameObject.Find("P2Char").GetComponent<CharStateManager>();
         fadeanimator = GameObject.Find("FadeTransition");
         //INITIALIZE SETTINGS
         announcerText.gameObject.SetActive(false);
@@ -206,6 +211,8 @@ public class RoundManager : MonoBehaviour
     {
         P1HP.resetChar();
         P2HP.resetChar();
+        GameObject.Find("P1Char").GetComponent<CharInputEngine>().EnableControls(false);
+        GameObject.Find("P2Char").GetComponent<CharInputEngine>().EnableControls(false);
 
         fadeanimator.GetComponent<FadeTransitionScript>().FadeIn();
         yield return new WaitForSeconds(fadeanimator.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
@@ -214,6 +221,8 @@ public class RoundManager : MonoBehaviour
         announcerText.gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(1);
         announcerText.text = "FIGHT";
+        GameObject.Find("P1Char").GetComponent<CharInputEngine>().EnableControls(true);
+        GameObject.Find("P2Char").GetComponent<CharInputEngine>().EnableControls(true);
         yield return new WaitForSecondsRealtime(1);
         announcerText.gameObject.SetActive(false);
         //Time.timeScale = 1;

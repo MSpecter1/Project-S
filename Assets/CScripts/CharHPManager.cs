@@ -7,11 +7,11 @@ using UnityEngine;
 //Manages getting hit and launches etc
 //ADD IS HIT BOOLEAN AND CALCULATE LAUNCH DISTANCE BASED ON ATTACK
 
-
 public class CharHPManager : MonoBehaviour
 {
     private Rigidbody2D m_Rigidbody2D;
     public CharInputEngine CharInputEngine;
+    public CharStateManager CharStateManager;
     
     //HP MANAGERMENT VARIABLES
     public int CharHP;
@@ -20,7 +20,7 @@ public class CharHPManager : MonoBehaviour
     public bool deadState = false;
     public bool invincibleState = false;
     public HealthBar healthbar;
-    SpriteRenderer SpriteRenderer;
+    public SpriteRenderer SpriteRenderer;
 
     public float floathp;
 
@@ -45,7 +45,7 @@ public class CharHPManager : MonoBehaviour
         floathp = (float)CharHP / CharMaxHP;
         healthbar.setSize(floathp);
         
-        if (!deadState && CharHP <= 0)
+        if (CharStateManager.getState()!=CharStateManager.CharState.DeadState && CharHP <= 0)
         {
             PlayerDied();
         }
@@ -53,16 +53,30 @@ public class CharHPManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown("m"))
-        {
-            resetChar();
-        }
+        //if (Input.GetKeyDown("m"))
+        //{
+        //    resetChar();
+        //}
     }
 
     public void setHP(int hp)
     {
         CharMaxHP = hp;
         CharHP = CharMaxHP;
+    }
+
+    public void damageHP(int damage)
+    {
+        //StartCoroutine(FlashDamageTaken());
+        if (CharHP - damage <= 0)
+        {
+            CharHP = 0;
+            //PlayerDied();
+        }
+        else if (CharHP > 0)
+        {
+            CharHP -= damage;
+        }
     }
 
     public void resetChar()
@@ -81,21 +95,20 @@ public class CharHPManager : MonoBehaviour
 
     public void PlayerDied()
     {
+        CharStateManager.setState(CharStateManager.CharState.DeadState);
         //SET ROUNDMANAGER BOOL
         GameObject.Find("RoundManager").GetComponent<RoundManager>().setDeath(gameObject);
         //SET OTHER BOOLS
-        deadState = true;
         invincibleState = true;
-        CharInputEngine.animator.SetBool("deadState", true);
     }
 
     public void PlayerRevive(int revivehp)
     {
         GameObject.Find("RoundManager").GetComponent<RoundManager>().setAlive(gameObject);
         CharHP = revivehp;
-        deadState = false;
         invincibleState = false;
-        CharInputEngine.animator.SetBool("deadState", false);
+        Debug.Log("Player has been revived");
+        CharStateManager.resetState();
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -109,30 +122,15 @@ public class CharHPManager : MonoBehaviour
         {
             LaunchDirection = 1;
         }
-
-        // TEMPORARY REMOVE LATER
-        if ((col.gameObject.layer == LayerMask.NameToLayer("Hitbox") || col.gameObject.layer == LayerMask.NameToLayer("ProjectileHitbox")) && !invincibleState) //IF HIT BY HITBOX FROM ENEMY ATTACK
-        {
-            Debug.Log("HIT");
-            StartCoroutine(FlashDamageTaken());
-            if (CharHP>0)
-            {
-                CharHP -= 1000;
-            }
-
-            //TEMPORARY CODE, EACH UNIQUE HIT SHOULD HAVE DIFFERENT LAUNCH FORCE
-            //HITTER SHOULD BE THE ONE THAT CAUSES "OTHER" TO GO FLYING
-            m_Rigidbody2D.velocity = new Vector2(LaunchDirection, 1) * 10f;
-        }
-
+        Debug.Log(gameObject.name + " got hit by "+ col.name);
     }
 
+    
     IEnumerator FlashDamageTaken()
     {
         //invincibleState = !invincibleState;
         for (int i = 0; i < 4; i++)
         {
-            SpriteRenderer = GetComponent<SpriteRenderer>();
             SpriteRenderer.color = Color.red;
             yield return new WaitForSeconds(.1f);
             SpriteRenderer.color = Color.white;

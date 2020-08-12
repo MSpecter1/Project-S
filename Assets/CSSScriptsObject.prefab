@@ -49,11 +49,11 @@ MonoBehaviour:
   P2Cindex: 0
   selected: 1
   P1CharList:
-  - {fileID: 6807680272095018669, guid: bd98a103239666a48841ed560fcc92bd, type: 3}
+  - {fileID: 222833959046851789, guid: 5f9fac8b2795ee14c88c8c5699b3318c, type: 3}
   - {fileID: 222833959046851789, guid: b6ed0029f05ad3e4fb05d3b4b33d9a28, type: 3}
   - {fileID: 3264813831865083235, guid: af6c7a1902b06d342910cdd7791832df, type: 3}
   P2CharList:
-  - {fileID: 6807680272095018669, guid: bd98a103239666a48841ed560fcc92bd, type: 3}
+  - {fileID: 222833959046851789, guid: 5f9fac8b2795ee14c88c8c5699b3318c, type: 3}
   - {fileID: 222833959046851789, guid: b6ed0029f05ad3e4fb05d3b4b33d9a28, type: 3}
   - {fileID: 3264813831865083235, guid: af6c7a1902b06d342910cdd7791832df, type: 3}
 --- !u!114 &8328003555462564389
@@ -92,13 +92,9 @@ MonoBehaviour:
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.InputSystem.PlayerInputManager+PlayerJoinedEvent, Unity.InputSystem,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.InputSystem.PlayerInputManager+PlayerLeftEvent, Unity.InputSystem,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_JoinAction:
     m_UseReference: 0
     m_Action:

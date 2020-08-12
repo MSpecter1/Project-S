@@ -13,10 +13,14 @@ public class CharInputEngine: MonoBehaviour
     public MoveController mControl;
     public Animator animator;
     public PlayerInput playerInput;
+    public CharEXManager exmanager;
+    public CharStateManager CharStateManager;
+    public CharFunctions CharacterFunctions;
+    public CharInputBuffer CharInputBuffer;
+    //TEMP
+    public CharAudioManager CharAudio;
 
-    public string PlayerName;
     public bool faceRight;
-    private bool blockState = false;
     private bool jumpState = false;
     private bool crouchState = false;
 
@@ -24,13 +28,11 @@ public class CharInputEngine: MonoBehaviour
     private float horizantalMove=0f;
 
     public bool isGrounded;
-    private bool inHitStun;
-    private bool inBlockStun;
-    private bool inRecovery;
 
     public Transform target;
 
     //Input buffer vector, discard actions after a time, 
+
 
     void Start()
     {
@@ -45,13 +47,11 @@ public class CharInputEngine: MonoBehaviour
         if (transform.name=="P1Char")
         {
             target = GameObject.Find("P2Char").transform;
-            PlayerName = "P1Char";
             
         }
         else
         {
             target = GameObject.Find("P1Char").transform;
-            PlayerName = "P2Char";
         }
         
         //ENABLE CONTROLS
@@ -66,11 +66,50 @@ public class CharInputEngine: MonoBehaviour
 
     }
 
+    public void EnableControls(bool input) //ENABLES OR DISABLE MOVING/ATTACKING
+    {
+        if (input)
+        {
+            playerInput.currentActionMap.Enable();
+        }
+        else
+        {
+            playerInput.currentActionMap.Disable();
+        }
+
+    }
+
     void FixedUpdate()
     {
+
         //MOVE
         GetMoveValue();
-        mControl.Move(horizantalMove * Time.fixedDeltaTime, crouchState, jumpState); //move character
+        if(CharStateManager.getState()!=CharStateManager.CharState.BlockStunState && CharStateManager.getState() != CharStateManager.CharState.HitStunState && CharStateManager.getState()!=CharStateManager.CharState.DeadState)
+        {
+            if ((faceRight && horizantalMove > 0) || (!faceRight && horizantalMove < 0))
+            {
+                mControl.Move(horizantalMove * Time.fixedDeltaTime, crouchState, jumpState, true); //move character forwards
+            }
+            else
+            {
+                mControl.Move(horizantalMove * Time.fixedDeltaTime, crouchState, jumpState, false); //move character backwards
+            }
+            //SET STATES
+            if (horizantalMove != 0)
+            {
+                CharStateManager.setState(CharStateManager.CharState.WalkState);
+            }
+            else
+            {
+                CharStateManager.setState(CharStateManager.CharState.IdleState);
+            }
+        }
+        else if (CharStateManager.getState()==CharStateManager.CharState.BlockStunState)
+        {
+            mControl.Move(0 * Time.fixedDeltaTime, crouchState, false, true);
+        }
+
+
 
         //FACE OTHER PLAYER
         if (target.position.x > transform.position.x && !faceRight) //if the target is to the right of enemy and the enemy is not facing right
@@ -80,24 +119,27 @@ public class CharInputEngine: MonoBehaviour
 
         //MAKE JUMP FALSE
         jumpState = false;
-    }
-
-    void OnMenu()
-    {
-
-    }
-
-    void OnSelect()
-    {
-
+        //set face right
+        CharStateManager.FacingRight = faceRight;
     }
 
     //MOVEMENT
     void GetMoveValue()
     {
-        if (!crouchState && !animator.GetBool("attackState"))
+        var temp = playerInput.currentActionMap.FindAction("Move", false).ReadValue<Vector2>();
+        if (!animator.GetBool("attackState"))
         {
-            var temp = playerInput.currentActionMap.FindAction("Move", false).ReadValue<Vector2>();
+            if (!animator.GetBool("HitStunState") && ((faceRight && temp.x < 0) || (!faceRight && temp.x > 0)))
+            {
+                CharStateManager.Blocking = true; 
+            }
+            else
+            {
+                CharStateManager.Blocking = false;
+            }
+        }
+        if (!crouchState && !animator.GetBool("attackState") && CharStateManager.getState()!=CharStateManager.CharState.BlockStunState)
+        {
             var movement = new Vector3();
             movement.x = temp.x;
             movement.z = temp.y;
@@ -109,13 +151,39 @@ public class CharInputEngine: MonoBehaviour
             horizantalMove = 0;
         }
     }
+
     public void OnMoveRight()
     {
+        if(faceRight)
+        {
+            CharInputBuffer.BufferInput(CharInputBuffer.input.right);
+        }
+        else
+        {
+            CharInputBuffer.BufferInput(CharInputBuffer.input.left);
+        }
         
     }
+
     public void OnMoveLeft()
     {
-        
+        if (faceRight)
+        {
+            CharInputBuffer.BufferInput(CharInputBuffer.input.left);
+        }
+        else
+        {
+            CharInputBuffer.BufferInput(CharInputBuffer.input.right);
+        }
+    }
+
+    public void OnDashRight()
+    {
+        Debug.Log("Dash Right");
+    }
+    public void OnDashLeft()
+    {
+        Debug.Log("Dash Left");
     }
     void OnMoveJump()
     {
@@ -127,9 +195,10 @@ public class CharInputEngine: MonoBehaviour
 
     void OnMoveCrouch()
     {
+        CharInputBuffer.BufferInput(CharInputBuffer.input.down);
         if (!jumpState)
         {
-            Debug.Log("CROUCHSTATE CHANGED");
+            //Debug.Log("CROUCHSTATE CHANGED");
             crouchState = !crouchState;
             if (crouchState)
             { 
@@ -146,23 +215,26 @@ public class CharInputEngine: MonoBehaviour
 
     void OnNAttackLight()
     {
-            animator.SetTrigger("lightNormal");
-
+        CharInputBuffer.BufferInput(CharInputBuffer.input.light);
+        //animator.SetTrigger("lightNormal");
     }
 
     void OnNAttackMedium()
     {
-            animator.SetTrigger("mediumNormal");
+        CharInputBuffer.BufferInput(CharInputBuffer.input.medium);
+        //animator.SetTrigger("mediumNormal");
     }
 
     void OnNAttackHeavy()
     {
-            animator.SetTrigger("heavyNormal");
+        CharInputBuffer.BufferInput(CharInputBuffer.input.heavy);
+        //animator.SetTrigger("heavyNormal");
     }
 
     void OnSpecialAttack()
     {
-            animator.SetTrigger("specialAttack1");
+        CharInputBuffer.BufferInput(CharInputBuffer.input.special);
+        //CharacterFunctions.SpecialAttack1(1);
     }
 
     //NON-INPUT FUNCTIONS
@@ -178,4 +250,11 @@ public class CharInputEngine: MonoBehaviour
         transform.localScale = theScale;
     }
 
+    public void PlaySoundClip(string soundname)
+    {
+        CharAudio.PlaySound(soundname);
+    }
+
 }
+
+

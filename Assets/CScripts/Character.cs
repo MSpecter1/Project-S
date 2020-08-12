@@ -39,7 +39,7 @@ public class Character : MonoBehaviour
     {
         // Move our character
 
-        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump, true);
         jump = false;
     }
 }
