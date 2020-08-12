@@ -211,6 +211,8 @@ MonoBehaviour:
   maxRound: 2
   P1HP: {fileID: 0}
   P2HP: {fileID: 0}
+  P1StateManager: {fileID: 0}
+  P2StateManager: {fileID: 0}
   fadeanimator: {fileID: 0}
   canvas: {fileID: 1394002044}
   P1CounterGroup: {fileID: 1157493973}

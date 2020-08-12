@@ -84,7 +84,7 @@ public class CharInputEngine: MonoBehaviour
 
         //MOVE
         GetMoveValue();
-        if(CharStateManager.getState()!=CharStateManager.CharState.BlockStunState && CharStateManager.getState() != CharStateManager.CharState.HitStunState)
+        if(CharStateManager.getState()!=CharStateManager.CharState.BlockStunState && CharStateManager.getState() != CharStateManager.CharState.HitStunState && CharStateManager.getState()!=CharStateManager.CharState.DeadState)
         {
             if ((faceRight && horizantalMove > 0) || (!faceRight && horizantalMove < 0))
             {
@@ -104,12 +104,12 @@ public class CharInputEngine: MonoBehaviour
                 CharStateManager.setState(CharStateManager.CharState.IdleState);
             }
         }
-        else
+        else if (CharStateManager.getState()==CharStateManager.CharState.BlockStunState)
         {
-            mControl.Move(0 * Time.fixedDeltaTime, crouchState, jumpState, true);
+            mControl.Move(0 * Time.fixedDeltaTime, crouchState, false, true);
         }
 
-        
+
 
         //FACE OTHER PLAYER
         if (target.position.x > transform.position.x && !faceRight) //if the target is to the right of enemy and the enemy is not facing right
@@ -119,6 +119,8 @@ public class CharInputEngine: MonoBehaviour
 
         //MAKE JUMP FALSE
         jumpState = false;
+        //set face right
+        CharStateManager.FacingRight = faceRight;
     }
 
     //MOVEMENT
@@ -127,7 +129,7 @@ public class CharInputEngine: MonoBehaviour
         var temp = playerInput.currentActionMap.FindAction("Move", false).ReadValue<Vector2>();
         if (!animator.GetBool("attackState"))
         {
-            if ((faceRight && temp.x < 0) || (!faceRight && temp.x > 0))
+            if (!animator.GetBool("HitStunState") && ((faceRight && temp.x < 0) || (!faceRight && temp.x > 0)))
             {
                 CharStateManager.Blocking = true; 
             }

@@ -62,7 +62,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &1004449837331179068
 MonoBehaviour:
@@ -104,14 +104,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21331b2464017b24b85557aadc7fb2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StandingPushBox: {fileID: 7193279929942894126}
+  CharStateManger: {fileID: 8741711514858778844}
   m_CrouchDisableCollider: {fileID: 0}
-  m_JumpForce: 2000
-  jumpVelocityX: 20
-  jumpVelocityY: 50
+  jumpVelocityY: 60
   m_CrouchSpeed: 0
-  m_MovementSmoothing: 0.05
-  m_AirControl: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -125,6 +121,7 @@ MonoBehaviour:
   OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
+  fallMultiplier: 2.5
 --- !u!114 &6450862796945947988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +143,7 @@ MonoBehaviour:
   CharInputBuffer: {fileID: 3714252054212860116}
   CharAudio: {fileID: 2828921852638863757}
   faceRight: 0
-  MoveSpeed: 125
+  MoveSpeed: 150
   isGrounded: 0
   target: {fileID: 0}
 --- !u!114 &3042527162626565502
@@ -388,7 +385,7 @@ MonoBehaviour:
   mediumCancellable: 0
   heavyCancellable: 0
   abilityCancellable: 0
-  collidersHit: []
+  thisHitbox: {fileID: 0}
 --- !u!1 &5026030164119379415
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,7 +700,7 @@ MonoBehaviour:
   mediumCancellable: 0
   heavyCancellable: 0
   abilityCancellable: 0
-  collidersHit: []
+  thisHitbox: {fileID: 0}
 --- !u!1 &7363072916951909558
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,11 +784,12 @@ Transform:
   m_GameObject: {fileID: 7529122160032250902}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.08913555, y: 1.8960758, z: 0}
-  m_LocalScale: {x: 0.06574463, y: 0.103762895, z: 0.042132236}
+  m_LocalScale: {x: 0.06574463, y: 0.103762895, z: 0.04213224}
   m_Children:
   - {fileID: 1066045824589973460}
   - {fileID: 5677274400634282192}
   - {fileID: 2001900622580653680}
+  - {fileID: 6477901221289582192}
   m_Father: {fileID: 1666878852667165654}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -901,7 +899,7 @@ MonoBehaviour:
   mediumCancellable: 0
   heavyCancellable: 0
   abilityCancellable: 0
-  collidersHit: []
+  thisHitbox: {fileID: 0}
 --- !u!1 &7937156158587308158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,3 +1251,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8819524736986782483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6477901221289582192}
+  m_Layer: 11
+  m_Name: GroundLightNormalHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6477901221289582192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8819524736986782483}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.1, y: 9.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5778092646978719724}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

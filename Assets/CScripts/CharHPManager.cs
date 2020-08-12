@@ -71,6 +71,7 @@ public class CharHPManager : MonoBehaviour
         if (CharHP - damage <= 0)
         {
             CharHP = 0;
+            //PlayerDied();
         }
         else if (CharHP > 0)
         {
@@ -94,11 +95,11 @@ public class CharHPManager : MonoBehaviour
 
     public void PlayerDied()
     {
+        CharStateManager.setState(CharStateManager.CharState.DeadState);
         //SET ROUNDMANAGER BOOL
         GameObject.Find("RoundManager").GetComponent<RoundManager>().setDeath(gameObject);
         //SET OTHER BOOLS
         invincibleState = true;
-        CharStateManager.ActiveState = CharStateManager.CharState.DeadState;
     }
 
     public void PlayerRevive(int revivehp)
@@ -106,6 +107,7 @@ public class CharHPManager : MonoBehaviour
         GameObject.Find("RoundManager").GetComponent<RoundManager>().setAlive(gameObject);
         CharHP = revivehp;
         invincibleState = false;
+        Debug.Log("Player has been revived");
         CharStateManager.resetState();
     }
 

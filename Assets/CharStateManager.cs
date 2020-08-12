@@ -10,6 +10,7 @@ public class CharStateManager : MonoBehaviour
 
     public bool FacingRight;
     public bool Blocking = false;
+    public int StunFrames = 0;
     public enum CharState
     {
         //MOVEMENT
@@ -41,10 +42,17 @@ public class CharStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ActiveState!=CharState.HitStunState && ActiveState != CharState.BlockStunState)
+       
+    }
+
+    private void FixedUpdate()
+    {
+        if (ActiveState != CharState.HitStunState && ActiveState != CharState.BlockStunState)
         {
             animator.SetBool("BlockStunState", false);
             animator.SetBool("HitStunState", false);
+            animator.SetInteger("ComboCounter", 0);
+            StunFrames = 0;
             CharHPManager.SpriteRenderer.color = Color.white;
         }
         switch (ActiveState)
@@ -52,7 +60,6 @@ public class CharStateManager : MonoBehaviour
             //MOVEMENT
             case CharState.IdleState:
                 {
-                    
                     animator.SetBool("WalkState", false);
                 }
                 break;
@@ -65,7 +72,7 @@ public class CharStateManager : MonoBehaviour
 
             case CharState.AirState:
                 {
-                    
+
                 }
                 break;
 
@@ -78,13 +85,13 @@ public class CharStateManager : MonoBehaviour
             //ATTACK
             case CharState.AttackStartupState:
                 {
-                   
+
                 }
                 break;
 
             case CharState.AttackActiveState:
                 {
-                    
+
                 }
                 break;
 
@@ -99,6 +106,14 @@ public class CharStateManager : MonoBehaviour
                 {
                     CharHPManager.SpriteRenderer.color = Color.blue;
                     animator.SetBool("BlockStunState", true);
+                    if (StunFrames == 0)
+                    {
+                        setState(CharState.IdleState);
+                    }
+                    else
+                    {
+                        StunFrames -= 1;
+                    }
                 }
                 break;
 
@@ -106,10 +121,21 @@ public class CharStateManager : MonoBehaviour
                 {
                     CharHPManager.SpriteRenderer.color = Color.red;
                     animator.SetBool("HitStunState", true);
+                    if (StunFrames == 0)
+                    {
+                        setState(CharState.IdleState);
+                    }
+                    else
+                    {
+                        StunFrames -= 1;
+                    }
                 }
                 break;
             case CharState.DeadState:
                 {
+                    //animator.SetBool("BlockStunState", false);
+                    //animator.SetBool("HitStunState", false);
+                    //animator.SetInteger("ComboCounter", 0);
                     animator.SetBool("DeadState", true);
                 }
                 break;
@@ -126,6 +152,7 @@ public class CharStateManager : MonoBehaviour
 
     public void setState(CharState state)
     {
+        //Debug.Log(gameObject.name + ": "+ state);
         ActiveState = state;
     }
 
@@ -136,6 +163,7 @@ public class CharStateManager : MonoBehaviour
 
     public void resetState()
     {
+        //Debug.Log(gameObject.name + " state reset");
         animator.SetBool("DeadState",false);
         ActiveState = CharState.IdleState;
     }
@@ -147,12 +175,19 @@ public class CharStateManager : MonoBehaviour
 
     public void StartBlockStun(int frames)
     {
-        StartCoroutine(BlockStunned(frames));
+        StunFrames = frames;
+        setState(CharStateManager.CharState.BlockStunState);
+        animator.SetTrigger("BlockStunHit");
+        //StartCoroutine(BlockStunned(frames));
     }
 
     public void StartHitStun(int frames)
     {
-        StartCoroutine(HitStunned(frames));
+        animator.SetInteger("ComboCounter", animator.GetInteger("ComboCounter")+1);
+        StunFrames = frames;
+        setState(CharStateManager.CharState.HitStunState);
+        animator.SetTrigger("HitStunHit");
+        //StartCoroutine(HitStunned(frames));
     }
 
     IEnumerator HitStunned(int frameCount)

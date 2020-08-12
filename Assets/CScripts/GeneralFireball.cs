@@ -58,6 +58,7 @@ public class GeneralFireball : MonoBehaviour
                 //Debug.Log(gameObject.name + ": landed a hit");
                 otherHP.damageHP(damage);
                 otherState.StartHitStun(framesOnHit);
+                otherChar.GetComponent<MoveController>().forceMove(false, 3);
 
             }
             else if (otherState.isBlocking() && otherState.getState() != CharStateManager.CharState.DeadState)//hit guarded enemy

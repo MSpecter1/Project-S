@@ -72,7 +72,7 @@ public class AkatsukiFunctions : CharFunctions
         b.transform.position = FireballStartLoc.transform.position;
         if (CharInputEngine.faceRight) //CHECK FLIP
         {
-            b.GetComponent<Rigidbody2D>().velocity = transform.right * 40;
+            b.GetComponent<Rigidbody2D>().velocity = transform.right * 60;
         }
         else
         {
@@ -80,7 +80,7 @@ public class AkatsukiFunctions : CharFunctions
             theScale.x *= -1;
             b.transform.localScale = theScale; //flip sprite
 
-            b.GetComponent<Rigidbody2D>().velocity = -transform.right * 40;
+            b.GetComponent<Rigidbody2D>().velocity = -transform.right * 60;
         }
     }
 

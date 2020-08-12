@@ -36,7 +36,7 @@ public class HitboxManager : MonoBehaviour
     void Start()
     {
         currentHitbox.isTrigger = true; // Set as a trigger so it doesn't collide with our environment
-        currentHitbox.enabled=false;
+        //currentHitbox.enabled = false;
     }
 
     public void setHitBox(hitBoxes val)
@@ -44,9 +44,11 @@ public class HitboxManager : MonoBehaviour
         if (val != hitBoxes.clear)
         {
             currentHitbox = Hitboxes[(int)val];
-            currentHitbox.enabled=true;
+            currentHitbox.enabled = true;
+            //currentHitbox.gameObject.SetActive(true);
             return;
         }
-        currentHitbox.enabled=false;
+        currentHitbox.enabled = false;
+        //currentHitbox.gameObject.SetActive(false);
     }
 }
