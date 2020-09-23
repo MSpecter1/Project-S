@@ -14,7 +14,7 @@ public class CharLoaderScript : MonoBehaviour
     public GameObject P1Char;
     public GameObject P2Char;
 
-    // Start is called before the first frame update\
+    //Start is called before the first frame update\
     void Awake()
     {
         if (cmanager.selected)
@@ -32,7 +32,7 @@ public class CharLoaderScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void SetFollowCam()
@@ -53,7 +53,7 @@ public class CharLoaderScript : MonoBehaviour
         targetGroup.m_Targets.SetValue(target2, 1);
         return;
 
-     
+
     }
 
 }
