@@ -9,6 +9,7 @@ public class GeneralFireball : MonoBehaviour
     private int framesOnBlock;
     private int framesOnHit;
     private GameObject user;
+    public float FireballKnockback = 700;
 
     void Start()
     {
@@ -58,19 +59,26 @@ public class GeneralFireball : MonoBehaviour
                 //Debug.Log(gameObject.name + ": landed a hit");
                 otherHP.damageHP(damage);
                 otherState.StartHitStun(framesOnHit);
-                otherChar.GetComponent<MoveController>().forceMove(false, 3);
+
+                otherChar.GetComponent<MoveController>().forceMove(false, FireballKnockback);
 
             }
             else if (otherState.isBlocking() && otherState.getState() != CharStateManager.CharState.DeadState)//hit guarded enemy
             {
                 otherState.StartBlockStun(framesOnBlock);
             }
-            Destroy(gameObject);
+            StartCoroutine(LingerFireball(5));
 
         }
-        else
+        else //hits wall etc
         {
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator LingerFireball(float frames) //lets fireball stall for a bit before disappearing
+    {
+        yield return new WaitForSeconds(frames/60);
+        Destroy(gameObject);
     }
 }

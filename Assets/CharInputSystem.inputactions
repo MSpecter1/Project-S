@@ -345,6 +345,22 @@
                     "interactions": ""
                 },
                 {
+                    "name": "DashLeft",
+                    "type": "Button",
+                    "id": "14ddf37d-7f90-40fe-8b25-393b4bb09c5e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "DashRight",
+                    "type": "Button",
+                    "id": "e80be93d-0c28-482b-8800-6f80ee7086ef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "NAttackLight",
                     "type": "Button",
                     "id": "c0a5d2da-a0a2-437d-ba58-3bc4a67bb3f6",
@@ -558,6 +574,28 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "6ccac890-ac67-4110-8124-3e1a5d6008ae",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DashLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b7668b6-021c-4e81-bb1b-45f8ca1fce46",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DashRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

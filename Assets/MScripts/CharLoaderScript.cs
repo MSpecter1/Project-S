@@ -22,7 +22,9 @@ public class CharLoaderScript : MonoBehaviour
             P1Char = Instantiate(cmanager.P1CharList[cmanager.P1CIndex], p1start, Quaternion.identity);
             P2Char = Instantiate(cmanager.P2CharList[cmanager.P2Cindex], p2start, Quaternion.identity);
             P1Char.name = "P1Char";
+            P1Char.tag = "P1";
             P2Char.name = "P2Char";
+            P2Char.tag = "P2";
             SetFollowCam();
         }
     }

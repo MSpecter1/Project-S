@@ -24,15 +24,12 @@ public class CharInputEngine: MonoBehaviour
     private bool jumpState = false;
     private bool crouchState = false;
 
-    public float MoveSpeed;
+    public float MoveSpeed = 10;
     private float horizantalMove=0f;
-
-    public bool isGrounded;
 
     public Transform target;
 
-    //Input buffer vector, discard actions after a time, 
-
+    public bool disableMovement = false;
 
     void Start()
     {
@@ -79,12 +76,24 @@ public class CharInputEngine: MonoBehaviour
 
     }
 
+    public void MovementSwitch(bool moveEnable)
+    {
+        if (moveEnable)
+        {
+            disableMovement = false;
+        }
+        else
+        {
+            disableMovement = true;
+        }
+    }
+
     void FixedUpdate()
     {
 
         //MOVE
         GetMoveValue();
-        if(CharStateManager.getState()!=CharStateManager.CharState.BlockStunState && CharStateManager.getState() != CharStateManager.CharState.HitStunState && CharStateManager.getState()!=CharStateManager.CharState.DeadState)
+        if (CharStateManager.getState() != CharStateManager.CharState.BlockStunState && CharStateManager.getState() != CharStateManager.CharState.HitStunState && CharStateManager.getState() != CharStateManager.CharState.DeadState)
         {
             if ((faceRight && horizantalMove > 0) || (!faceRight && horizantalMove < 0))
             {
@@ -104,7 +113,7 @@ public class CharInputEngine: MonoBehaviour
                 CharStateManager.setState(CharStateManager.CharState.IdleState);
             }
         }
-        else if (CharStateManager.getState()==CharStateManager.CharState.BlockStunState)
+        else if (CharStateManager.getState() == CharStateManager.CharState.BlockStunState)
         {
             mControl.Move(0 * Time.fixedDeltaTime, crouchState, false, true);
         }
@@ -112,10 +121,16 @@ public class CharInputEngine: MonoBehaviour
 
 
         //FACE OTHER PLAYER
-        if (target.position.x > transform.position.x && !faceRight) //if the target is to the right of enemy and the enemy is not facing right
+        if (target.position.x > transform.position.x && !faceRight && mControl.m_Grounded) //if the target is to the right and the player is not facing right
         { Flip(); }
-        if (target.position.x < transform.position.x && faceRight)
+        else if (target.position.x < transform.position.x && faceRight && mControl.m_Grounded)
         { Flip(); }
+
+        //if (target.position.x > transform.position.x && !faceRight && isGrounded) //if the target is to the right of enemy and the enemy is not facing right
+        //{ Flip(); }
+        //else if (target.position.x < transform.position.x && faceRight && isGrounded)
+        //{ Flip(); }
+
 
         //MAKE JUMP FALSE
         jumpState = false;
@@ -140,11 +155,23 @@ public class CharInputEngine: MonoBehaviour
         }
         if (!crouchState && !animator.GetBool("attackState") && CharStateManager.getState()!=CharStateManager.CharState.BlockStunState)
         {
-            var movement = new Vector3();
-            movement.x = temp.x;
-            movement.z = temp.y;
-            movement.Normalize();
-            horizantalMove = movement.x * MoveSpeed;
+            //var movement = new Vector2();
+            //movement.x = temp.x;
+            //movement.y = temp.y;
+            //movement.Normalize();
+            //horizantalMove = movement.x * MoveSpeed;
+            if (temp.x > 0)
+            {
+                horizantalMove = 1 * MoveSpeed;
+            }
+            else if (temp.x < 0)
+            {
+                horizantalMove = -1 * MoveSpeed;
+            }
+            else
+            {
+                horizantalMove = 0;
+            }
         }
         else
         {
@@ -180,10 +207,12 @@ public class CharInputEngine: MonoBehaviour
     public void OnDashRight()
     {
         Debug.Log("Dash Right");
+        mControl.Dash(1, 1000);
     }
     public void OnDashLeft()
     {
         Debug.Log("Dash Left");
+        mControl.Dash(-1, 1000);
     }
     void OnMoveJump()
     {

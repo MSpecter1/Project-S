@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimatorScriptRedirector : MonoBehaviour
 {
     public CharFunctions characterFunctions;
+    public CharStateManager charStateManager;
     public HitboxManager hitboxmanager;
 
     // Start is called before the first frame update
@@ -17,6 +18,11 @@ public class AnimatorScriptRedirector : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void callCharStateManager(CharStateManager.CharState newState)
+    {
+        charStateManager.setState(newState);
     }
 
     public void callHitBoxManager(HitboxManager.hitBoxes val)

@@ -100,14 +100,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.13333334
+  - time: 0.11666667
     functionName: callHitBoxManager
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 12
     messageOptions: 0
-  - time: 0.21666667
+  - time: 0.2
     functionName: callHitBoxManager
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -120,4 +120,11 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 12
+    messageOptions: 0
+  - time: 0.41666666
+    functionName: callCharStateManager
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
     messageOptions: 0

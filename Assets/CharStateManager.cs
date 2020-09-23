@@ -33,6 +33,7 @@ public class CharStateManager : MonoBehaviour
         TauntState
     }
     public CharState ActiveState = CharState.IdleState;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -102,7 +103,7 @@ public class CharStateManager : MonoBehaviour
                 break;
 
             //DEFENSE
-            case CharState.BlockStunState:
+            case CharState.BlockStunState: //technically doesn't let you move, see InputEngine if confused
                 {
                     CharHPManager.SpriteRenderer.color = Color.blue;
                     animator.SetBool("BlockStunState", true);

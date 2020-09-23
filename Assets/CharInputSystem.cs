@@ -358,6 +358,22 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""DashLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""14ddf37d-7f90-40fe-8b25-393b4bb09c5e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DashRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""e80be93d-0c28-482b-8800-6f80ee7086ef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""NAttackLight"",
                     ""type"": ""Button"",
                     ""id"": ""c0a5d2da-a0a2-437d-ba58-3bc4a67bb3f6"",
@@ -571,6 +587,28 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ccac890-ac67-4110-8124-3e1a5d6008ae"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DashLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b7668b6-021c-4e81-bb1b-45f8ca1fce46"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DashRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1498,6 +1536,8 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
         m_FGInputsKeyboard2_MoveLeft = m_FGInputsKeyboard2.FindAction("MoveLeft", throwIfNotFound: true);
         m_FGInputsKeyboard2_MoveJump = m_FGInputsKeyboard2.FindAction("MoveJump", throwIfNotFound: true);
         m_FGInputsKeyboard2_MoveCrouch = m_FGInputsKeyboard2.FindAction("MoveCrouch", throwIfNotFound: true);
+        m_FGInputsKeyboard2_DashLeft = m_FGInputsKeyboard2.FindAction("DashLeft", throwIfNotFound: true);
+        m_FGInputsKeyboard2_DashRight = m_FGInputsKeyboard2.FindAction("DashRight", throwIfNotFound: true);
         m_FGInputsKeyboard2_NAttackLight = m_FGInputsKeyboard2.FindAction("NAttackLight", throwIfNotFound: true);
         m_FGInputsKeyboard2_NAttackMedium = m_FGInputsKeyboard2.FindAction("NAttackMedium", throwIfNotFound: true);
         m_FGInputsKeyboard2_NAttackHeavy = m_FGInputsKeyboard2.FindAction("NAttackHeavy", throwIfNotFound: true);
@@ -1724,6 +1764,8 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_FGInputsKeyboard2_MoveLeft;
     private readonly InputAction m_FGInputsKeyboard2_MoveJump;
     private readonly InputAction m_FGInputsKeyboard2_MoveCrouch;
+    private readonly InputAction m_FGInputsKeyboard2_DashLeft;
+    private readonly InputAction m_FGInputsKeyboard2_DashRight;
     private readonly InputAction m_FGInputsKeyboard2_NAttackLight;
     private readonly InputAction m_FGInputsKeyboard2_NAttackMedium;
     private readonly InputAction m_FGInputsKeyboard2_NAttackHeavy;
@@ -1739,6 +1781,8 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
         public InputAction @MoveLeft => m_Wrapper.m_FGInputsKeyboard2_MoveLeft;
         public InputAction @MoveJump => m_Wrapper.m_FGInputsKeyboard2_MoveJump;
         public InputAction @MoveCrouch => m_Wrapper.m_FGInputsKeyboard2_MoveCrouch;
+        public InputAction @DashLeft => m_Wrapper.m_FGInputsKeyboard2_DashLeft;
+        public InputAction @DashRight => m_Wrapper.m_FGInputsKeyboard2_DashRight;
         public InputAction @NAttackLight => m_Wrapper.m_FGInputsKeyboard2_NAttackLight;
         public InputAction @NAttackMedium => m_Wrapper.m_FGInputsKeyboard2_NAttackMedium;
         public InputAction @NAttackHeavy => m_Wrapper.m_FGInputsKeyboard2_NAttackHeavy;
@@ -1769,6 +1813,12 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
                 @MoveCrouch.started -= m_Wrapper.m_FGInputsKeyboard2ActionsCallbackInterface.OnMoveCrouch;
                 @MoveCrouch.performed -= m_Wrapper.m_FGInputsKeyboard2ActionsCallbackInterface.OnMoveCrouch;
                 @MoveCrouch.canceled -= m_Wrapper.m_FGInputsKeyboard2ActionsCallbackInterface.OnMoveCrouch;
+                @DashLeft.started -= m_Wrapper.m_FGInputsKeyboard2ActionsCallbackInterface.OnDashLeft;
+                @DashLeft.performed -= m_Wrapper.m_FGInputsKeyboard2ActionsCallbackInterface.OnDashLeft;
+                @DashLeft.canceled -= m_Wrapper.m_FGInputsKeyboard2ActionsCallbackInterface.OnDashLeft;
+                @DashRight.started -= m_Wrapper.m_FGInputsKeyboard2ActionsCallbackInterface.OnDashRight;
+                @DashRight.performed -= m_Wrapper.m_FGInputsKeyboard2ActionsCallbackInterface.OnDashRight;
+                @DashRight.canceled -= m_Wrapper.m_FGInputsKeyboard2ActionsCallbackInterface.OnDashRight;
                 @NAttackLight.started -= m_Wrapper.m_FGInputsKeyboard2ActionsCallbackInterface.OnNAttackLight;
                 @NAttackLight.performed -= m_Wrapper.m_FGInputsKeyboard2ActionsCallbackInterface.OnNAttackLight;
                 @NAttackLight.canceled -= m_Wrapper.m_FGInputsKeyboard2ActionsCallbackInterface.OnNAttackLight;
@@ -1806,6 +1856,12 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
                 @MoveCrouch.started += instance.OnMoveCrouch;
                 @MoveCrouch.performed += instance.OnMoveCrouch;
                 @MoveCrouch.canceled += instance.OnMoveCrouch;
+                @DashLeft.started += instance.OnDashLeft;
+                @DashLeft.performed += instance.OnDashLeft;
+                @DashLeft.canceled += instance.OnDashLeft;
+                @DashRight.started += instance.OnDashRight;
+                @DashRight.performed += instance.OnDashRight;
+                @DashRight.canceled += instance.OnDashRight;
                 @NAttackLight.started += instance.OnNAttackLight;
                 @NAttackLight.performed += instance.OnNAttackLight;
                 @NAttackLight.canceled += instance.OnNAttackLight;
@@ -2174,6 +2230,8 @@ public class @CharInputSystem : IInputActionCollection, IDisposable
         void OnMoveLeft(InputAction.CallbackContext context);
         void OnMoveJump(InputAction.CallbackContext context);
         void OnMoveCrouch(InputAction.CallbackContext context);
+        void OnDashLeft(InputAction.CallbackContext context);
+        void OnDashRight(InputAction.CallbackContext context);
         void OnNAttackLight(InputAction.CallbackContext context);
         void OnNAttackMedium(InputAction.CallbackContext context);
         void OnNAttackHeavy(InputAction.CallbackContext context);

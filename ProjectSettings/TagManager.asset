@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Projectile
+  - P1
+  - P2
   layers:
   - Default
   - TransparentFX
@@ -47,4 +49,10 @@ TagManager:
     locked: 0
   - name: Inner Cell
     uniqueID: 1852121573
+    locked: 0
+  - name: Player
+    uniqueID: 3658283895
+    locked: 0
+  - name: Behind Player
+    uniqueID: 1643168615
     locked: 0

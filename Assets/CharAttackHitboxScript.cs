@@ -39,6 +39,8 @@ public class CharAttackHitboxScript : MonoBehaviour
         specialLaunchAttack,
     }
 
+    public float AttackKnockback = 400;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -131,10 +133,10 @@ public class CharAttackHitboxScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.gameObject.name);
+        Debug.Log(other.gameObject.name + " was hit");
         if (other.gameObject.layer == LayerMask.NameToLayer("Hurtbox")) //IF HITTING ENEMY
         {
-            GameObject otherChar = other.transform.parent.parent.gameObject;
+            GameObject otherChar = other.transform.parent.parent.gameObject; //get other gameobject, which is grandparent of enemy hurtbox
             CharHPManager otherHP = otherChar.GetComponent<CharHPManager>();
             CharStateManager otherState = otherChar.GetComponent<CharStateManager>();
 
@@ -142,7 +144,9 @@ public class CharAttackHitboxScript : MonoBehaviour
             {
                 // Debug.Log(gameObject.name + ": landed a hit");
                 otherState.StartHitStun(framesOnHit);
-                otherChar.GetComponent<MoveController>().forceMove(false, 3);
+
+                otherChar.GetComponent<MoveController>().forceMove(false, AttackKnockback); //TEMPORARY HITBOX FIX PLEASE REMOVE LATER
+
                 otherHP.damageHP(attackDamage);
 
                 switch (thisAttackType) //check what can cancel off this attack on hit

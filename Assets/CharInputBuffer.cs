@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class CharInputBuffer : MonoBehaviour
 {
     public CharInputEngine charInputEngine;
+    public float inputWindow = 36f;
     public bool midclear=false;
     public enum input
     {
@@ -29,7 +30,7 @@ public class CharInputBuffer : MonoBehaviour
     {
         if (!midclear)
         {
-            StartCoroutine(ClearAfterTime(2f));
+            StartCoroutine(ClearAfterTime(inputWindow/60f)); // divided by 60 to get frames
         }
     }
 

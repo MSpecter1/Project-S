@@ -31,6 +31,7 @@ public class RoundManager : MonoBehaviour
     public bool P2Dead = false;
     public bool timerActive = false;
 
+    public bool debugMode = false;
 
 
     void Start()
@@ -44,7 +45,12 @@ public class RoundManager : MonoBehaviour
         //INITIALIZE SETTINGS
         announcerText.gameObject.SetActive(false);
         currentRound = 0; //set to first round
-        newRound();
+
+        if (!debugMode) //DEBUG PURPOSES ONLY, DISABLES TIMER/FADEIN/ROUNDSTART
+        {
+            newRound();
+        }
+        //newRound();
     }
 
     void FixedUpdate()
@@ -211,6 +217,7 @@ public class RoundManager : MonoBehaviour
     {
         P1HP.resetChar();
         P2HP.resetChar();
+
         GameObject.Find("P1Char").GetComponent<CharInputEngine>().EnableControls(false);
         GameObject.Find("P2Char").GetComponent<CharInputEngine>().EnableControls(false);
 

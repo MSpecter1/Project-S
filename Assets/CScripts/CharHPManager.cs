@@ -82,14 +82,14 @@ public class CharHPManager : MonoBehaviour
     public void resetChar()
     {
         PlayerRevive(CharMaxHP);
-        Debug.Log("CHAR RESET");
+        //Debug.Log("CHAR RESET");
         if (transform.name=="P1Char")
         { 
-            transform.position = GameObject.Find("CSSScriptsObject").GetComponent<CharLoaderScript>().p1start; 
+            transform.position = GameObject.Find("GameManager").GetComponent<CharLoaderScript>().p1start; 
         }
         else if (transform.name == "P2Char")
         { 
-            transform.position = GameObject.Find("CSSScriptsObject").GetComponent<CharLoaderScript>().p2start; 
+            transform.position = GameObject.Find("GameManager").GetComponent<CharLoaderScript>().p2start; 
         }
 }
 
@@ -113,7 +113,7 @@ public class CharHPManager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        float LaunchDirection = 0; //CALCULATE LAUNCH DIRECTION IF HIT
+        float LaunchDirection = 0; //CALCULATE LAUNCH DIRECTION IF HIT NEED TO IMPLEMENT?
         if (CharInputEngine.faceRight)
         {
             LaunchDirection = -1;

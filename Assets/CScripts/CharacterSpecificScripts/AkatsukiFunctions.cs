@@ -6,12 +6,6 @@ using UnityEngine;
 
 public class AkatsukiFunctions : CharFunctions
 {
-    //public CharInputEngine CharInputEngine;
-    //public CharHPManager hpmanager;
-    //public CharEXManager exmanager;
-
-    //public Animator animator;
-
     public GameObject FireballStartLoc;
     public GameObject ultFireballStartLoc;
     
@@ -31,7 +25,7 @@ public class AkatsukiFunctions : CharFunctions
         
     }
 
-    public override void SpecialAttack1(int variant)
+    public override void SpecialAttack1(int variant) //hadouken
     {
         if (!ProjectileActive)
         {
@@ -52,7 +46,7 @@ public class AkatsukiFunctions : CharFunctions
         switch(val)
         {
             case 0:
-                LaunchHadouken(FireballDamage);
+                LaunchHadouken(FireballDamage); //light fireball
                 break;
             default:
                 Debug.Log(gameObject.name + " called \"Launch Projectile\" but its value was incorrect/missing");
