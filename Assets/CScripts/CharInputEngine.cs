@@ -93,15 +93,19 @@ public class CharInputEngine: MonoBehaviour
 
         //MOVE
         GetMoveValue();
-        if (CharStateManager.getState() != CharStateManager.CharState.BlockStunState && CharStateManager.getState() != CharStateManager.CharState.HitStunState && CharStateManager.getState() != CharStateManager.CharState.DeadState)
+        if (disableMovement == false && CharStateManager.getState() != CharStateManager.CharState.BlockStunState && CharStateManager.getState() != CharStateManager.CharState.HitStunState && CharStateManager.getState() != CharStateManager.CharState.DeadState)
         {
             if ((faceRight && horizantalMove > 0) || (!faceRight && horizantalMove < 0))
             {
                 mControl.Move(horizantalMove * Time.fixedDeltaTime, crouchState, jumpState, true); //move character forwards
             }
-            else
+            else if ((!faceRight && horizantalMove > 0) || (faceRight && horizantalMove < 0))
             {
                 mControl.Move(horizantalMove * Time.fixedDeltaTime, crouchState, jumpState, false); //move character backwards
+            }
+            else
+            {
+                mControl.Move(horizantalMove * Time.fixedDeltaTime, crouchState, jumpState, true); //character remains still
             }
             //SET STATES
             if (horizantalMove != 0)

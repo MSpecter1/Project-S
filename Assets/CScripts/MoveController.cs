@@ -14,12 +14,15 @@ public class MoveController : MonoBehaviour
     public bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
     public Animator animator;
-    public float RayDistance; //FOR SETTING HEIGHT FOR CHECKING IF GROUNDED
 
-    public float fallMultiplier = 2.5f;
+    private float RayDistance; //FOR SETTING HEIGHT FOR CHECKING IF GROUNDED
+    public GameObject RaycastTarget;
+
+    public float fallMultiplier;
 
     public bool gravity = true;
-    public float gravitySpeed = 50f;
+    public float gravitySpeed = 100f;
+    public float jumpVelocityX = 40f;
     public float jumpVelocityY = 60f;
     public float jumpMaxHeight = 10f;
 
@@ -27,6 +30,8 @@ public class MoveController : MonoBehaviour
     public float dashSpeed = 5000;
     public float dashTimeFrames = 10f;
     public float dashDistance;
+    public int airDashCount = 1;
+    private int currentDashCount;
 
     public AfterImageGhostController ghostcontroller;
 
@@ -41,20 +46,22 @@ public class MoveController : MonoBehaviour
         //CHECK IF GROUNDED
         m_Grounded = IsGrounded();
         animator.SetBool("Grounded", m_Grounded);
-
-        //IF GROUNDED IS FALSE
         Vector2 currentV = m_Rigidbody2D.velocity;
-        if (!m_Grounded && gravity)
+        if (m_Grounded)
+        {
+            currentDashCount = airDashCount;
+        }
+        else if (!m_Grounded && gravity) //enable gravity
         {
             // m_Rigidbody2D.velocity = new Vector2(currentV.x, -gravitySpeed);
             m_Rigidbody2D.velocity += Vector2.up * -gravitySpeed * Time.deltaTime;
-        }
 
-        //BETTER JUMPING
-        //if (m_Rigidbody2D.velocity.y < 0)
-        //{
-        //    m_Rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        //}
+            //BETTER JUMPING
+            if (m_Rigidbody2D.velocity.y < 0)
+            {
+                m_Rigidbody2D.velocity += Vector2.up * -gravitySpeed * (fallMultiplier - 1) * Time.deltaTime;
+            }
+        }
 
         //ANIMATOR PARAMETER SET
         animator.SetFloat("YVelocity", m_Rigidbody2D.velocity.y);
@@ -64,6 +71,7 @@ public class MoveController : MonoBehaviour
 
     bool IsGrounded()
     {
+        RayDistance = transform.position.y - RaycastTarget.transform.position.y;
         Vector2 position = transform.position;
         Vector2 direction = Vector2.down;
         Vector2 drawtest = new Vector2(0, -1 * RayDistance);
@@ -79,13 +87,20 @@ public class MoveController : MonoBehaviour
 
     public void Move(float move, bool crouch, bool jump, bool forwards)
     {
+        //movespeed * time.deltatime * 1 (orientation of move) = move
 
         //only control the player if grounded or airControl is turned on
+        var targetVelocity = new Vector2();
         if (m_Grounded && !isDashing)
         {
-            var targetVelocity = new Vector2();
             switch (forwards)
             {
+                case true when jump == true && move == 0:
+                targetVelocity = new Vector2(0, jumpVelocityY);
+                m_Rigidbody2D.velocity = targetVelocity;
+                Debug.Log("SWITCH NEUTRAL JUMP" + move);
+                break;
+
                 case true when jump == false:
                     targetVelocity = new Vector2(move, m_Rigidbody2D.velocity.y);
                     m_Rigidbody2D.velocity = targetVelocity;
@@ -95,7 +110,14 @@ public class MoveController : MonoBehaviour
                 case true when jump == true: //forward jump
                     m_Grounded = false;
                     StartCoroutine(JumpAirTime());
-                    targetVelocity = new Vector2(move, jumpVelocityY);
+                    if (charStateManager.FacingRight==true)
+                    {
+                        targetVelocity = new Vector2(jumpVelocityX, jumpVelocityY);
+                    }
+                    else
+                    {
+                        targetVelocity = new Vector2(-1 * jumpVelocityX, jumpVelocityY);
+                    }
                     m_Rigidbody2D.velocity = targetVelocity;
                     //Debug.Log("SWITCH FORWARD JUMP" + move); 
                     break;
@@ -109,7 +131,14 @@ public class MoveController : MonoBehaviour
                 case false when jump == true:
                     m_Grounded = false;
                     StartCoroutine(JumpAirTime());
-                    targetVelocity = new Vector2(move, jumpVelocityY);
+                    if (charStateManager.FacingRight == true)
+                    {
+                        targetVelocity = new Vector2(-1* jumpVelocityX, jumpVelocityY);
+                    }
+                    else
+                    {
+                        targetVelocity = new Vector2(1 * jumpVelocityX, jumpVelocityY);
+                    }
                     m_Rigidbody2D.velocity = targetVelocity;
                     //Debug.Log("SWITCH BACKWARDS JUMP" + move); 
                     break;
@@ -122,13 +151,11 @@ public class MoveController : MonoBehaviour
 
     IEnumerator JumpAirTime() //Entire jump sequence = 40 frames = 40/60 seconds
     {
-        //gravity = false;
         for (float i = 0f; i <= 40f / 60f; i += 1 / 60f)
         {
-
+            
         }
         yield return new WaitForSeconds(0.4f);
-        //gravity = true;
     }
 
     public void Dash(float pushdirection, float dashspeed)
@@ -136,17 +163,38 @@ public class MoveController : MonoBehaviour
        if (m_Grounded)
         {
             isDashing = true;
-            ghostcontroller.enableAfterimage(true);
             StartCoroutine(DashTimer(pushdirection, dashTimeFrames, dashSpeed));
+        }
+       else if (!m_Grounded && currentDashCount>=airDashCount)
+        {
+            currentDashCount -= 1;
+            isDashing = true;
+            StartCoroutine(AirDashTimer(pushdirection, dashTimeFrames, dashSpeed));
         }
     }
 
     IEnumerator DashTimer(float pushdirection, float frames, float speed)
     {
+        m_Rigidbody2D.velocity = new Vector2(pushdirection * speed / 10, 0);
+        yield return new WaitForSeconds(3 / 60f);
+        ghostcontroller.enableAfterimage(true);
         m_Rigidbody2D.velocity = new Vector2(pushdirection * speed, 0);
         yield return new WaitForSeconds(frames/60);
         isDashing = false;
         ghostcontroller.enableAfterimage(false);
+    }
+    IEnumerator AirDashTimer(float pushdirection, float frames, float speed)
+    {
+        gravity = false;
+        m_Rigidbody2D.velocity = new Vector2(pushdirection * speed / 10, 0);
+        yield return new WaitForSeconds(4/60f);
+        ghostcontroller.enableAfterimage(true);
+        m_Rigidbody2D.velocity = new Vector2(pushdirection * speed, 0);
+        yield return new WaitForSeconds(frames / 60);
+        isDashing = false;
+        gravity = true;
+        ghostcontroller.enableAfterimage(false);
+        m_Rigidbody2D.velocity = new Vector2(pushdirection * speed/4, 0);
     }
 
     public void forceMove(bool forwards, float movespeed) // add enum for different directions north souwest etc

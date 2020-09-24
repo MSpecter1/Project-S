@@ -41,6 +41,7 @@ Transform:
   - {fileID: 5390182796286895764}
   - {fileID: 2987260461754889762}
   - {fileID: 2078484122068778603}
+  - {fileID: 3330105620461266574}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -115,16 +116,18 @@ MonoBehaviour:
   m_Grounded: 0
   m_FacingRight: 1
   animator: {fileID: 7773427728954802526}
-  RayDistance: 13
-  fallMultiplier: 2.5
+  RaycastTarget: {fileID: 7803615251540411616}
+  fallMultiplier: 2
   gravity: 1
-  gravitySpeed: 40
+  gravitySpeed: 90
+  jumpVelocityX: 25
   jumpVelocityY: 60
   jumpMaxHeight: 10
   isDashing: 0
   dashSpeed: 100
   dashTimeFrames: 10
   dashDistance: 0
+  airDashCount: 1
   ghostcontroller: {fileID: 5279049037725866927}
 --- !u!114 &6450862796945947988
 MonoBehaviour:
@@ -383,7 +386,7 @@ MonoBehaviour:
   attackDamage: 500
   thisAttackType: 1
   thisAttackLaunchType: 0
-  framesOnHit: 28
+  framesOnHit: 6
   framesOnBlock: 22
   low: 0
   overhead: 0
@@ -392,6 +395,7 @@ MonoBehaviour:
   heavyCancellable: 0
   abilityCancellable: 0
   thisHitbox: {fileID: 0}
+  playerNumber: 0
   AttackKnockback: 400
 --- !u!1 &5026030164119379415
 GameObject:
@@ -718,8 +722,8 @@ MonoBehaviour:
   attackDamage: 700
   thisAttackType: 2
   thisAttackLaunchType: 0
-  framesOnHit: 28
-  framesOnBlock: 22
+  framesOnHit: 9
+  framesOnBlock: 5
   low: 0
   overhead: 0
   lightCancellable: 0
@@ -727,7 +731,8 @@ MonoBehaviour:
   heavyCancellable: 0
   abilityCancellable: 0
   thisHitbox: {fileID: 0}
-  AttackKnockback: 400
+  playerNumber: 0
+  AttackKnockback: 800
 --- !u!1 &7363072916951909558
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,6 +850,7 @@ MonoBehaviour:
   - {fileID: 0}
   currentHitbox: {fileID: 8059812331825449897}
   activeHitBox: 0
+  playerNum: 0
 --- !u!1 &7529410082096674507
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,7 +924,7 @@ MonoBehaviour:
   attackDamage: 200
   thisAttackType: 0
   thisAttackLaunchType: 0
-  framesOnHit: 25
+  framesOnHit: 5
   framesOnBlock: 19
   low: 0
   overhead: 0
@@ -927,7 +933,38 @@ MonoBehaviour:
   heavyCancellable: 0
   abilityCancellable: 0
   thisHitbox: {fileID: 0}
+  playerNumber: 0
   AttackKnockback: 400
+--- !u!1 &7803615251540411616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3330105620461266574}
+  m_Layer: 0
+  m_Name: RaycastGroundPos
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3330105620461266574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7803615251540411616}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -10, z: -3.8185978}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 222833959046851786}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7937156158587308158
 GameObject:
   m_ObjectHideFlags: 0

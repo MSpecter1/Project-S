@@ -33,13 +33,6 @@ public class AkatsukiFunctions : CharFunctions
             ProjectileActive = true;
         }
     }
-    void OnTriggerEnter2D(Collider2D other) //Check if ANY hitbox attacks a hurtbox
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Hurtbox")) //IF HITTING ENEMY HURTBOX
-        {
-            Debug.Log(gameObject.name + "'s attack landed a hit");
-        }
-    }
 
     public override void LaunchProjectile(int val)
     {

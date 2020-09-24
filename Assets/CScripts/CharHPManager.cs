@@ -122,7 +122,7 @@ public class CharHPManager : MonoBehaviour
         {
             LaunchDirection = 1;
         }
-        Debug.Log(gameObject.name + " got hit by "+ col.name);
+        //Debug.Log(gameObject.name + " got hit by "+ col.name);
     }
 
     

@@ -10,6 +10,7 @@ public class GeneralFireball : MonoBehaviour
     private int framesOnHit;
     private GameObject user;
     public float FireballKnockback = 700;
+    public float FireballShakeIntensity = 5f;
 
     void Start()
     {
@@ -60,6 +61,7 @@ public class GeneralFireball : MonoBehaviour
                 otherHP.damageHP(damage);
                 otherState.StartHitStun(framesOnHit);
 
+                CinemachineShake.Instance.ShakeCamera(FireballShakeIntensity, 0.5f); //TEMP
                 otherChar.GetComponent<MoveController>().forceMove(false, FireballKnockback);
 
             }
