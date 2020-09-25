@@ -176,6 +176,7 @@ MonoBehaviour:
   HadoukenFire: {fileID: 5996409647713253403, guid: afc61cd8a4792604ba0cfd61281efe70,
     type: 3}
   FireballDamage: 1000
+  fireballSpeed: 0
 --- !u!114 &3714252054212860116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charInputEngine: {fileID: 0}
+  inputWindow: 36
+  currentInputWindow: 0
   midclear: 0
 --- !u!114 &6980759098198975514
 MonoBehaviour:
@@ -227,7 +230,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharStateManger: {fileID: 8741711514858778844}
-  jumpVelocityY: 60
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -238,6 +240,8 @@ MonoBehaviour:
   fallMultiplier: 2.5
   gravity: 1
   gravitySpeed: 40
+  jumpVelocityY: 60
+  jumpMaxHeight: 10
 --- !u!1 &2121067577821959294
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,6 +388,9 @@ MonoBehaviour:
   heavyCancellable: 0
   abilityCancellable: 0
   thisHitbox: {fileID: 0}
+  playerNumber: 0
+  timeshit: 0
+  AttackKnockback: 400
 --- !u!1 &5026030164119379415
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +503,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -560,6 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterFunctions: {fileID: 1649172047670708551}
+  charStateManager: {fileID: 0}
   hitboxmanager: {fileID: 2849242054960562662}
 --- !u!1 &5804865655573618182
 GameObject:
@@ -700,6 +708,9 @@ MonoBehaviour:
   heavyCancellable: 0
   abilityCancellable: 0
   thisHitbox: {fileID: 0}
+  playerNumber: 0
+  timeshit: 0
+  AttackKnockback: 400
 --- !u!1 &7363072916951909558
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +828,7 @@ MonoBehaviour:
   - {fileID: 0}
   currentHitbox: {fileID: 8059812331825449897}
   activeHitBox: 0
+  playerNum: 0
 --- !u!1 &7529410082096674507
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,6 +911,9 @@ MonoBehaviour:
   heavyCancellable: 0
   abilityCancellable: 0
   thisHitbox: {fileID: 0}
+  playerNumber: 0
+  timeshit: 0
+  AttackKnockback: 400
 --- !u!1 &7937156158587308158
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,7 +1011,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1220,7 +1235,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
