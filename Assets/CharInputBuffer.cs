@@ -102,8 +102,9 @@ public class CharInputBuffer : MonoBehaviour
                             charInputEngine.animator.SetTrigger("heavyNormal");
                             break;
                         case input.special:
-                            charInputEngine.animator.ResetTrigger("specialAttack1");
-                            charInputEngine.animator.SetTrigger("specialAttack1");
+                            //charInputEngine.animator.ResetTrigger("specialAttack1");
+                            //charInputEngine.animator.SetTrigger("specialAttack1");
+                            charInputEngine.CharacterFunctions.SpecialAttack1(1);
                             break;
                     }
                 }

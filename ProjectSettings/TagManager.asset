@@ -50,8 +50,14 @@ TagManager:
   - name: Inner Cell
     uniqueID: 1852121573
     locked: 0
-  - name: Stage
+  - name: StageBackground
     uniqueID: 3017807231
+    locked: 0
+  - name: StageForeground
+    uniqueID: 3361061245
+    locked: 0
+  - name: StageGround
+    uniqueID: 3683561775
     locked: 0
   - name: UI
     uniqueID: 2167825929

@@ -22,7 +22,10 @@ public class AkatsukiFunctions : CharFunctions
     // Update is called once per frame
     void Update()
     {
-        
+        //if (ProjectileActive)
+        //{
+        //    Debug.Log("Projectile is Active");
+        //}
     }
 
     public override void SpecialAttack1(int variant) //hadouken
