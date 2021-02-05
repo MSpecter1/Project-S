@@ -171,26 +171,23 @@ public class MoveController : MonoBehaviour
 
     IEnumerator JumpAirTime() //Entire jump sequence = 40 frames = 40/60 seconds , also used for juggles?
     {
-        for (float i = 0f; i <= 40f / 60f; i += 1 / 60f)
-        {
-            
-        LockYConstraint(false);
-        enableJump = false;
-        //GameObject.Find("StandingPushbox").GetComponent<Collider2D>().enabled = false;
-        for (float i = 0f; i <= 120f / 60f; i += 1 / 60f)
-        {
-            yield return new WaitForSeconds(1 / 60f);
-            if (m_Grounded) //landed
+            LockYConstraint(false);
+            enableJump = false;
+            //GameObject.Find("StandingPushbox").GetComponent<Collider2D>().enabled = false;
+            for (float i = 0f; i <= 120f / 60f; i += 1 / 60f)
             {
-                CInput.ClearAttackInputs(); //clear any inputs
-                //GameObject.Find("StandingPushbox").GetComponent<Collider2D>().enabled = true;
-                Debug.Log("Jump time = " + i*60);
-                LockYConstraint(true);
-                enableJump = true;
-                yield break;
+                yield return new WaitForSeconds(1 / 60f);
+                if (m_Grounded) //landed
+                {
+                    CInput.ClearAttackInputs(); //clear any inputs
+                                                //GameObject.Find("StandingPushbox").GetComponent<Collider2D>().enabled = true;
+                    Debug.Log("Jump time = " + i * 60);
+                    LockYConstraint(true);
+                    enableJump = true;
+                    yield break;
+                }
             }
-        }
-        yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.4f);
     }
 
     public void Dash(float pushdirection, float dashspeed)

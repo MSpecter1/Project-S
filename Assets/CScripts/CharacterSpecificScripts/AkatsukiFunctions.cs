@@ -6,11 +6,16 @@ using UnityEngine;
 
 public class AkatsukiFunctions : CharFunctions
 {
-    public GameObject FireballStartLoc;
-    public GameObject ultFireballStartLoc;
-    
-    public GameObject HadoukenFire;
-    public int FireballDamage;
+    [SerializeField]
+    private GameObject FireballStartLoc;
+    [SerializeField]
+    private GameObject ultFireballStartLoc;
+    [SerializeField]
+    private GameObject HadoukenFire;
+    [SerializeField]
+    private int FireballDamage;
+    [SerializeField]
+    private int fireballSpeed = 8;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +38,6 @@ public class AkatsukiFunctions : CharFunctions
         if (!ProjectileActive)
         {
             animator.SetTrigger("specialAttack1");
-            ProjectileActive = true;
         }
     }
 
@@ -62,7 +66,7 @@ public class AkatsukiFunctions : CharFunctions
         b.transform.position = FireballStartLoc.transform.position;
         if (CharInputEngine.faceRight) //CHECK FLIP
         {
-            b.GetComponent<Rigidbody2D>().velocity = transform.right * 60;
+            b.GetComponent<Rigidbody2D>().velocity = transform.right * fireballSpeed;
         }
         else
         {
@@ -70,8 +74,9 @@ public class AkatsukiFunctions : CharFunctions
             theScale.x *= -1;
             b.transform.localScale = theScale; //flip sprite
 
-            b.GetComponent<Rigidbody2D>().velocity = -transform.right * 60;
+            b.GetComponent<Rigidbody2D>().velocity = -transform.right * fireballSpeed;
         }
+        ProjectileActive = true;
     }
 
     public void LaunchUltHadouken() //SPECIAL ATTACK 1
@@ -90,7 +95,7 @@ public class AkatsukiFunctions : CharFunctions
 
         if (CharInputEngine.faceRight) //CHECK FLIP
         {
-            b.GetComponent<Rigidbody2D>().velocity = transform.right * 70;
+            b.GetComponent<Rigidbody2D>().velocity = transform.right * fireballSpeed;
         }
         else
         {
@@ -98,7 +103,7 @@ public class AkatsukiFunctions : CharFunctions
             theScale.x *= -1;
             b.transform.localScale = theScale; //flip sprite
 
-            b.GetComponent<Rigidbody2D>().velocity = -transform.right * 70;
+            b.GetComponent<Rigidbody2D>().velocity = -transform.right * fireballSpeed;
         }
 
     }

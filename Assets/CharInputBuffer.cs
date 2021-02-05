@@ -174,6 +174,7 @@ public class CharInputBuffer : MonoBehaviour
         charInputEngine.animator.ResetTrigger("lightNormal");
         charInputEngine.animator.ResetTrigger("mediumNormal");
         charInputEngine.animator.ResetTrigger("heavyNormal");
+        charInputEngine.animator.ResetTrigger("specialAttack1");
         //midclear = false;
     }
 }

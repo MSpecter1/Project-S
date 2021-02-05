@@ -235,8 +235,8 @@ MonoBehaviour:
   ultFireballStartLoc: {fileID: 8131818432279814209}
   HadoukenFire: {fileID: 5996409647713253403, guid: afc61cd8a4792604ba0cfd61281efe70,
     type: 3}
-  FireballDamage: 1000
-  fireballSpeed: 3
+  FireballDamage: 0
+  fireballSpeed: 8
 --- !u!114 &3714252054212860116
 MonoBehaviour:
   m_ObjectHideFlags: 0
