@@ -118,10 +118,11 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -215,6 +216,9 @@ MonoBehaviour:
   m_DeviceRegainedEvent:
     m_PersistentCalls:
       m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
@@ -233,27 +237,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21331b2464017b24b85557aadc7fb2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StandingPushBox: {fileID: 7193279929942894126}
-  m_CrouchDisableCollider: {fileID: 7882317306914455400}
-  m_JumpForce: 2000
-  jumpVelocityX: 14
-  jumpVelocityY: 50
-  m_CrouchSpeed: 0
-  m_MovementSmoothing: 0.05
-  m_AirControl: 0
+  charStateManager: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
   m_Grounded: 0
   m_FacingRight: 1
   animator: {fileID: 222833959046851783}
-  RayDistance: 10
-  OnLandEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCrouchEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  RaycastTarget: {fileID: 0}
+  fallMultiplier: 0
+  gravity: 1
+  gravitySpeed: 100
+  jumpVelocityX: 14
+  jumpVelocityY: 50
+  jumpMaxHeight: 10
+  isDashing: 0
+  dashSpeed: 5000
+  dashTimeFrames: 10
+  dashDistance: 0
+  airDashCount: 1
+  ghostcontroller: {fileID: 0}
 --- !u!114 &6450862796945947988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,11 +274,13 @@ MonoBehaviour:
   playerInput: {fileID: 1004449837331179068}
   exmanager: {fileID: 3706067296445339409}
   CharStateManager: {fileID: 8741711514858778844}
+  CharacterFunctions: {fileID: 0}
+  CharInputBuffer: {fileID: 0}
   CharAudio: {fileID: 2828921852638863757}
   faceRight: 0
   MoveSpeed: 100
-  isGrounded: 0
   target: {fileID: 0}
+  disableMovement: 0
 --- !u!114 &40444152090840125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +297,7 @@ MonoBehaviour:
   CharInputEngine: {fileID: 6450862796945947988}
   hpmanager: {fileID: 3042527162626565502}
   exmanager: {fileID: 3706067296445339409}
+  ProjectileActive: 0
   FireballStartLoc: {fileID: 8712086288024856391}
   ultFireballStartLoc: {fileID: 8131818432279814209}
   HadoukenFire: {fileID: 5996409647713253403, guid: afc61cd8a4792604ba0cfd61281efe70,
@@ -352,6 +358,8 @@ MonoBehaviour:
   CharHPManager: {fileID: 3042527162626565502}
   CharInputEngine: {fileID: 6450862796945947988}
   FacingRight: 0
+  Blocking: 0
+  StunFrames: 0
   ActiveState: 0
 --- !u!1 &2121067577821959294
 GameObject:
@@ -492,10 +500,16 @@ MonoBehaviour:
   thisAttackLaunchType: 0
   framesOnHit: 0
   framesOnBlock: 0
+  low: 0
+  overhead: 0
   lightCancellable: 0
   mediumCancellable: 0
   heavyCancellable: 0
   abilityCancellable: 0
+  thisHitbox: {fileID: 0}
+  playerNumber: 0
+  timeshit: 0
+  AttackKnockback: 400
 --- !u!1 &5026030164119379415
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,10 +699,16 @@ MonoBehaviour:
   thisAttackLaunchType: 0
   framesOnHit: 0
   framesOnBlock: 0
+  low: 0
+  overhead: 0
   lightCancellable: 0
   mediumCancellable: 0
   heavyCancellable: 0
   abilityCancellable: 0
+  thisHitbox: {fileID: 0}
+  playerNumber: 0
+  timeshit: 0
+  AttackKnockback: 400
 --- !u!1 &7529122160032250902
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,10 +817,16 @@ MonoBehaviour:
   thisAttackLaunchType: 0
   framesOnHit: 0
   framesOnBlock: 0
+  low: 0
+  overhead: 0
   lightCancellable: 0
   mediumCancellable: 0
   heavyCancellable: 0
   abilityCancellable: 0
+  thisHitbox: {fileID: 0}
+  playerNumber: 0
+  timeshit: 0
+  AttackKnockback: 400
 --- !u!1 &7937156158587308158
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,10 +920,11 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1117,10 +1144,11 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
