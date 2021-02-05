@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5996409647713253403}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.782, y: 7.802, z: 0}
-  m_LocalScale: {x: 0.88700235, y: 0.88700235, z: 0.88700235}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -48,6 +48,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -69,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -636683401
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 01827ee3e77249f45aa9e6314dfac36a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -142,3 +144,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c1e7e0e873e67047a4f8bc39605d5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FireballKnockback: 100
+  FireballShakeIntensity: 5

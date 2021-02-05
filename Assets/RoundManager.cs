@@ -34,6 +34,11 @@ public class RoundManager : MonoBehaviour
     public bool debugMode = false;
 
 
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
+
     void Start()
     {
         //SET VARIABLES
@@ -53,7 +58,7 @@ public class RoundManager : MonoBehaviour
         //newRound();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         //UPDATE VARIABLES
         roundTimer.text = "" + (int)timeLeft;

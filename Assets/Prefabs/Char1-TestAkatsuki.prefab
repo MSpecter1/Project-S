@@ -42,6 +42,8 @@ Transform:
   - {fileID: 2987260461754889762}
   - {fileID: 2078484122068778603}
   - {fileID: 3330105620461266574}
+  - {fileID: 5766989645273248159}
+  - {fileID: 1932088411673941324}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -65,7 +67,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!114 &1004449837331179068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,14 +119,14 @@ MonoBehaviour:
   m_FacingRight: 1
   animator: {fileID: 7773427728954802526}
   RaycastTarget: {fileID: 7803615251540411616}
-  fallMultiplier: 2
+  fallMultiplier: 1.3
   gravity: 1
-  gravitySpeed: 90
-  jumpVelocityX: 25
-  jumpVelocityY: 60
+  gravitySpeed: 27
+  jumpVelocityX: 3.5
+  jumpVelocityY: 12
   jumpMaxHeight: 10
   isDashing: 0
-  dashSpeed: 100
+  dashSpeed: 10
   dashTimeFrames: 10
   dashDistance: 0
   airDashCount: 1
@@ -150,7 +152,7 @@ MonoBehaviour:
   CharInputBuffer: {fileID: 3714252054212860116}
   CharAudio: {fileID: 2828921852638863757}
   faceRight: 0
-  MoveSpeed: 1500
+  MoveSpeed: 170
   target: {fileID: 0}
   disableMovement: 0
 --- !u!114 &3042527162626565502
@@ -234,6 +236,7 @@ MonoBehaviour:
   HadoukenFire: {fileID: 5996409647713253403, guid: afc61cd8a4792604ba0cfd61281efe70,
     type: 3}
   FireballDamage: 1000
+  fireballSpeed: 3
 --- !u!114 &3714252054212860116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charInputEngine: {fileID: 6450862796945947988}
   inputWindow: 36
+  currentInputWindow: 0
   midclear: 0
 --- !u!1 &2121067577821959294
 GameObject:
@@ -277,9 +281,57 @@ Transform:
   m_LocalScale: {x: 0.39091757, y: 0.5833693, z: 0.37919006}
   m_Children:
   - {fileID: 7989953713565797611}
+  - {fileID: 3408652555024773993}
   m_Father: {fileID: 222833959046851786}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2265080313403382756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3408652555024773993}
+  - component: {fileID: 470576181971490052}
+  m_Layer: 12
+  m_Name: AirPushbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3408652555024773993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2265080313403382756}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 2.558084, y: 1.7141801, z: 2.6371999}
+  m_Children: []
+  m_Father: {fileID: 5390182796286895764}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &470576181971490052
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2265080313403382756}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.037037313, y: -0.05602791}
+  m_Size: {x: 0.5345682, y: 0.88794404}
+  m_Direction: 0
 --- !u!1 &2286605141171088000
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,8 +438,8 @@ MonoBehaviour:
   attackDamage: 500
   thisAttackType: 1
   thisAttackLaunchType: 0
-  framesOnHit: 6
-  framesOnBlock: 22
+  framesOnHit: 18
+  framesOnBlock: 13
   low: 0
   overhead: 0
   lightCancellable: 0
@@ -396,7 +448,80 @@ MonoBehaviour:
   abilityCancellable: 0
   thisHitbox: {fileID: 0}
   playerNumber: 0
-  AttackKnockback: 400
+  timeshit: 0
+  AttackKnockback: 60
+--- !u!1 &4379054527671582252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1932088411673941324}
+  - component: {fileID: 7789835931308020336}
+  m_Layer: 0
+  m_Name: Point Light 2D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1932088411673941324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4379054527671582252}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 222833959046851786}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7789835931308020336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4379054527671582252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.81
+  m_Color: {r: 0.5801887, g: 0.940911, b: 1, a: 1}
+  m_Intensity: 2
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 000000007f15e0b3
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &5026030164119379415
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,8 +607,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5216985736114648760}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.53, y: -10.66, z: 0}
-  m_LocalScale: {x: 5.946, y: 5.622138, z: 9}
+  m_LocalPosition: {x: 0.053, y: -0.057, z: 0}
+  m_LocalScale: {x: 0.572034, y: 0.572034, z: 5.148306}
   m_Children:
   - {fileID: 2506144605456624421}
   - {fileID: 6091184329568790199}
@@ -529,7 +654,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -636683401
-  m_SortingLayer: 3
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f7ae8196e1e939441a20dae3ce878bc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -617,7 +742,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5804865655573618182}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.06, y: 0.21, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078484122068778603}
@@ -636,7 +761,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -4.0659065}
+  m_Offset: {x: -0.056422666, y: 0.7336147}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -647,7 +772,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 11.066805, y: 11.839773}
+  m_Size: {x: 0.66274595, y: 1.4678493}
   m_EdgeRadius: 0
 --- !u!1 &6410949886687641338
 GameObject:
@@ -722,8 +847,8 @@ MonoBehaviour:
   attackDamage: 700
   thisAttackType: 2
   thisAttackLaunchType: 0
-  framesOnHit: 9
-  framesOnBlock: 5
+  framesOnHit: 25
+  framesOnBlock: 12
   low: 0
   overhead: 0
   lightCancellable: 0
@@ -732,7 +857,8 @@ MonoBehaviour:
   abilityCancellable: 0
   thisHitbox: {fileID: 0}
   playerNumber: 0
-  AttackKnockback: 800
+  timeshit: 0
+  AttackKnockback: 80
 --- !u!1 &7363072916951909558
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +884,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363072916951909558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2078484122068778603}
@@ -777,7 +903,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.032280207, y: 1.7665539}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -788,7 +914,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.7882385, y: 7.9297256}
+  m_Size: {x: 0.4517485, y: 0.4808898}
   m_EdgeRadius: 0
 --- !u!1 &7529122160032250902
 GameObject:
@@ -924,8 +1050,8 @@ MonoBehaviour:
   attackDamage: 200
   thisAttackType: 0
   thisAttackLaunchType: 0
-  framesOnHit: 5
-  framesOnBlock: 19
+  framesOnHit: 17
+  framesOnBlock: 14
   low: 0
   overhead: 0
   lightCancellable: 0
@@ -934,7 +1060,8 @@ MonoBehaviour:
   abilityCancellable: 0
   thisHitbox: {fileID: 0}
   playerNumber: 0
-  AttackKnockback: 400
+  timeshit: 0
+  AttackKnockback: 40
 --- !u!1 &7803615251540411616
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,7 +1086,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7803615251540411616}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: -3.8185978}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 222833959046851786}
@@ -974,7 +1101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7989953713565797611}
-  - component: {fileID: 7193279929942894126}
+  - component: {fileID: 4684781876795040876}
   m_Layer: 12
   m_Name: StandingPushbox
   m_TagString: Untagged
@@ -990,14 +1117,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7937156158587308158}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -14.4, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 2.558084, y: 1.7141801, z: 2.6371999}
   m_Children: []
   m_Father: {fileID: 5390182796286895764}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &7193279929942894126
-CircleCollider2D:
+--- !u!70 &4684781876795040876
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1009,9 +1136,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.3732347
+  m_Offset: {x: -0.037037313, y: -0.05602791}
+  m_Size: {x: 0.5345682, y: 0.88794404}
+  m_Direction: 0
 --- !u!1 &8131818432279814209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,6 +1221,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8331714769596048769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5766989645273248159}
+  m_Layer: 0
+  m_Name: CameraFocusPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5766989645273248159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331714769596048769}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 222833959046851786}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8701199560215586574
 GameObject:
   m_ObjectHideFlags: 0

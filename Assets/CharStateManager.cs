@@ -41,12 +41,9 @@ public class CharStateManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-       
-    }
+    //void FixedUpdate()}
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (ActiveState != CharState.HitStunState && ActiveState != CharState.BlockStunState)
         {
@@ -125,6 +122,8 @@ public class CharStateManager : MonoBehaviour
                     if (StunFrames == 0)
                     {
                         setState(CharState.IdleState);
+                        Debug.Log("RECOVERED!!!");
+                        Debug.Log("COMBO: " + animator.GetInteger("ComboCounter"));
                     }
                     else
                     {
@@ -177,7 +176,10 @@ public class CharStateManager : MonoBehaviour
     public void StartBlockStun(int frames)
     {
         StunFrames = frames;
-        setState(CharStateManager.CharState.BlockStunState);
+        if (ActiveState != CharStateManager.CharState.BlockStunState)
+        {
+            setState(CharStateManager.CharState.BlockStunState);
+        }
         animator.SetTrigger("BlockStunHit");
         //StartCoroutine(BlockStunned(frames));
     }
@@ -186,7 +188,10 @@ public class CharStateManager : MonoBehaviour
     {
         animator.SetInteger("ComboCounter", animator.GetInteger("ComboCounter")+1);
         StunFrames = frames;
-        setState(CharStateManager.CharState.HitStunState);
+        if (ActiveState!= CharStateManager.CharState.HitStunState)
+        {
+            setState(CharStateManager.CharState.HitStunState);
+        }
         animator.SetTrigger("HitStunHit");
         //StartCoroutine(HitStunned(frames));
     }

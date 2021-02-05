@@ -54,7 +54,7 @@ public class CharAttackHitboxScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Attacking)
         {
@@ -101,7 +101,7 @@ public class CharAttackHitboxScript : MonoBehaviour
                     {
                         timeshit++;
                     }
-                    Debug.Log(transform.parent.parent + "OVERLAPcollider hit: " + t.tag + "'s " + t);
+                    //Debug.Log(transform.parent.parent + "OVERLAPcollider hit: " + t.tag + "'s " + t);
 
                     //ON HIT
                     onHit(t);

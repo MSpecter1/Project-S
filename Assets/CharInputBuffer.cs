@@ -8,6 +8,8 @@ public class CharInputBuffer : MonoBehaviour
 {
     public CharInputEngine charInputEngine;
     public float inputWindow = 36f;
+    [SerializeField]
+    private float currentInputWindow = 0;
     public bool midclear=false;
     public enum input
     {
@@ -26,36 +28,28 @@ public class CharInputBuffer : MonoBehaviour
     //private List<input> PrevInputs = new List<input>();
     private input[] PrevInputs;
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (!midclear)
+        if (currentInputWindow>0)
         {
-            StartCoroutine(ClearAfterTime(inputWindow/60f)); // divided by 60 to get frames
+            currentInputWindow -= Time.deltaTime;
+        }
+        else if (currentInputWindow == 0)
+        {
+            StartCoroutine(ClearAfterTime(0 / 60f));
         }
     }
 
     public void BufferInput(input currentInput)
     {
-        //if (currentInput == input.light || currentInput == input.medium || currentInput == input.heavy || currentInput == input.special) //check if attack, if so can stack multiple times
-        //{
-        //    DetectedInputs.Push(currentInput);
-        //}
-        //else if (DetectedInputs.Count == 0 || DetectedInputs.Peek() != currentInput) //if direction, must be unique to adjacent input
-        //{
-        //    DetectedInputs.Push(currentInput);
-        //}
 
         DetectedInputs.Push(currentInput);
+        currentInputWindow = 12;
 
         
         if (currentInput == input.light || currentInput == input.medium || currentInput == input.heavy || currentInput == input.special) //check if attack was buffered and detect special input
         {
             DetectedInputs.Pop();
-            //foreach (input item in DetectedInputs.ToArray())
-            //{
-            //    PrevInputs.Add(item);
-            //    DetectedInputs.Pop();
-            //}
             PrevInputs = DetectedInputs.ToArray();
             for (int i = 0; i <= PrevInputs.Length; i++)
             {
@@ -108,8 +102,9 @@ public class CharInputBuffer : MonoBehaviour
                             charInputEngine.animator.SetTrigger("heavyNormal");
                             break;
                         case input.special:
-                            charInputEngine.animator.ResetTrigger("specialAttack1");
-                            charInputEngine.animator.SetTrigger("specialAttack1");
+                            //charInputEngine.animator.ResetTrigger("specialAttack1");
+                            //charInputEngine.animator.SetTrigger("specialAttack1");
+                            charInputEngine.CharacterFunctions.SpecialAttack1(1);
                             break;
                     }
                 }
@@ -156,19 +151,18 @@ public class CharInputBuffer : MonoBehaviour
         }
         Debug.Log(inputstring);
     }
+
+    public void ClearAttackInputs()
+    {
+        StartCoroutine(ClearAfterTime(0 / 60f));
+    }
     IEnumerator ClearAfterTime(float time)
     {
-        midclear = true;
         yield return new WaitForSeconds(time);
-        //Debug.Log("MIDCLEAR=FALSE");
-        midclear = false;
-        //Debug.Log("CLEAR STACK");
-        //PrintPastInputs();
         DetectedInputs.Clear();
         charInputEngine.animator.ResetTrigger("lightNormal");
         charInputEngine.animator.ResetTrigger("mediumNormal");
         charInputEngine.animator.ResetTrigger("heavyNormal");
-        //midclear = false;
     }
 }
 

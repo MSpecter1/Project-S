@@ -53,12 +53,12 @@ public class CharLoaderScript : MonoBehaviour
         CinemachineTargetGroup targetGroup = GameObject.Find("CamTargetGroup").GetComponent<CinemachineTargetGroup>();
 
         Cinemachine.CinemachineTargetGroup.Target target1;
-        target1.target = P1Char.transform;
+        target1.target = P1Char.transform.Find("CameraFocusPoint").transform; ;
         target1.weight = 1;
         target1.radius = 0;
 
         Cinemachine.CinemachineTargetGroup.Target target2;
-        target2.target = P2Char.transform;
+        target2.target = P2Char.transform.Find("CameraFocusPoint").transform;
         target2.weight = 1;
         target2.radius = 0;
 
