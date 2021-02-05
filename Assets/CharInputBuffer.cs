@@ -28,7 +28,7 @@ public class CharInputBuffer : MonoBehaviour
     //private List<input> PrevInputs = new List<input>();
     private input[] PrevInputs;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (currentInputWindow>0)
         {
@@ -150,6 +150,11 @@ public class CharInputBuffer : MonoBehaviour
             }
         }
         Debug.Log(inputstring);
+    }
+
+    public void ClearAttackInputs()
+    {
+        StartCoroutine(ClearAfterTime(0 / 60f));
     }
     IEnumerator ClearAfterTime(float time)
     {

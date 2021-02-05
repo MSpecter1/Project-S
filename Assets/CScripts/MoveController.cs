@@ -25,6 +25,7 @@ public class MoveController : MonoBehaviour
     public float jumpVelocityX = 40f;
     public float jumpVelocityY = 60f;
     public float jumpMaxHeight = 10f;
+    private bool enableJump = true;
 
     public bool isDashing = false;
     public float dashSpeed = 5000;
@@ -34,14 +35,17 @@ public class MoveController : MonoBehaviour
     private int currentDashCount;
 
     public AfterImageGhostController ghostcontroller;
+    private CharInputBuffer CInput;
 
 
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        CInput = GetComponent<CharInputBuffer>();
+
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         //CHECK IF GROUNDED
         m_Grounded = IsGrounded();
@@ -54,6 +58,7 @@ public class MoveController : MonoBehaviour
         else if (!m_Grounded && gravity) //enable gravity
         {
             // m_Rigidbody2D.velocity = new Vector2(currentV.x, -gravitySpeed);
+            //Debug.Log("GRAVITY WORKING");
             m_Rigidbody2D.velocity += Vector2.up * -gravitySpeed * Time.deltaTime;
 
             //BETTER JUMPING
@@ -85,6 +90,19 @@ public class MoveController : MonoBehaviour
         return false;
     }
 
+    public void LockYConstraint(bool switchY) //prevents rigidbody from moving in Y direction
+    {
+        switch(switchY)
+        {
+            case true:
+                m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+                break;
+            case false:
+                m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+                break;
+        }
+    }
+
     public void Move(float move, bool crouch, bool jump, bool forwards)
     {
         //movespeed * time.deltatime * 1 (orientation of move) = move
@@ -95,11 +113,12 @@ public class MoveController : MonoBehaviour
         {
             switch (forwards)
             {
-                case true when jump == true && move == 0:
+                case true when jump == true && move == 0 && enableJump:
+                m_Grounded = false;
+                StartCoroutine(JumpAirTime());
                 targetVelocity = new Vector2(0, jumpVelocityY);
                 m_Rigidbody2D.velocity = targetVelocity;
-                StartCoroutine(JumpAirTime());
-                Debug.Log("SWITCH NEUTRAL JUMP!" + move);
+                //Debug.Log("SWITCH NEUTRAL JUMP! Speed = " + move);
                 break;
 
                 case true when jump == false:
@@ -108,7 +127,7 @@ public class MoveController : MonoBehaviour
                     //Debug.Log("SWITCH FORWARD" + move); 
                     break;
 
-                case true when jump == true: //forward jump
+                case true when jump == true && enableJump: //forward jump
                     m_Grounded = false;
                     StartCoroutine(JumpAirTime());
                     if (charStateManager.FacingRight==true)
@@ -129,7 +148,7 @@ public class MoveController : MonoBehaviour
                     //Debug.Log("SWITCH BACKWARDS" + move); 
                     break;
 
-                case false when jump == true:
+                case false when jump == true && enableJump:
                     m_Grounded = false;
                     StartCoroutine(JumpAirTime());
                     if (charStateManager.FacingRight == true)
@@ -150,14 +169,21 @@ public class MoveController : MonoBehaviour
         }
     }
 
-    IEnumerator JumpAirTime() //Entire jump sequence = 40 frames = 40/60 seconds
+    IEnumerator JumpAirTime() //Entire jump sequence = 40 frames = 40/60 seconds , also used for juggles?
     {
+        LockYConstraint(false);
+        enableJump = false;
+        //GameObject.Find("StandingPushbox").GetComponent<Collider2D>().enabled = false;
         for (float i = 0f; i <= 120f / 60f; i += 1 / 60f)
         {
-            yield return new WaitForSeconds(1/60f);
-            if (m_Grounded)
+            yield return new WaitForSeconds(1 / 60f);
+            if (m_Grounded) //landed
             {
+                CInput.ClearAttackInputs(); //clear any inputs
+                //GameObject.Find("StandingPushbox").GetComponent<Collider2D>().enabled = true;
                 Debug.Log("Jump time = " + i*60);
+                LockYConstraint(true);
+                enableJump = true;
                 yield break;
             }
         }
