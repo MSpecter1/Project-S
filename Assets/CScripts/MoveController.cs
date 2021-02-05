@@ -98,8 +98,7 @@ public class MoveController : MonoBehaviour
                 case true when jump == true && move == 0:
                 targetVelocity = new Vector2(0, jumpVelocityY);
                 m_Rigidbody2D.velocity = targetVelocity;
-                StartCoroutine(JumpAirTime());
-                Debug.Log("SWITCH NEUTRAL JUMP!" + move);
+                Debug.Log("SWITCH NEUTRAL JUMP" + move);
                 break;
 
                 case true when jump == false:
@@ -152,15 +151,11 @@ public class MoveController : MonoBehaviour
 
     IEnumerator JumpAirTime() //Entire jump sequence = 40 frames = 40/60 seconds
     {
-        for (float i = 0f; i <= 120f / 60f; i += 1 / 60f)
+        for (float i = 0f; i <= 40f / 60f; i += 1 / 60f)
         {
-            yield return new WaitForSeconds(1/60f);
-            if (m_Grounded)
-            {
-                Debug.Log("Jump time = " + i*60);
-                yield break;
-            }
+            
         }
+        yield return new WaitForSeconds(0.4f);
     }
 
     public void Dash(float pushdirection, float dashspeed)

@@ -119,9 +119,9 @@ MonoBehaviour:
   RaycastTarget: {fileID: 7803615251540411616}
   fallMultiplier: 2
   gravity: 1
-  gravitySpeed: 250
+  gravitySpeed: 90
   jumpVelocityX: 25
-  jumpVelocityY: 110
+  jumpVelocityY: 60
   jumpMaxHeight: 10
   isDashing: 0
   dashSpeed: 100
@@ -150,7 +150,7 @@ MonoBehaviour:
   CharInputBuffer: {fileID: 3714252054212860116}
   CharAudio: {fileID: 2828921852638863757}
   faceRight: 0
-  MoveSpeed: 1800
+  MoveSpeed: 1500
   target: {fileID: 0}
   disableMovement: 0
 --- !u!114 &3042527162626565502
@@ -234,7 +234,6 @@ MonoBehaviour:
   HadoukenFire: {fileID: 5996409647713253403, guid: afc61cd8a4792604ba0cfd61281efe70,
     type: 3}
   FireballDamage: 1000
-  fireballSpeed: 30
 --- !u!114 &3714252054212860116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +248,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charInputEngine: {fileID: 6450862796945947988}
   inputWindow: 36
-  currentInputWindow: 0
   midclear: 0
 --- !u!1 &2121067577821959294
 GameObject:

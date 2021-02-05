@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Special Attacks for MTSebby
+
 public class AkatsukiFunctions : CharFunctions
 {
     public GameObject FireballStartLoc;
@@ -9,8 +11,6 @@ public class AkatsukiFunctions : CharFunctions
     
     public GameObject HadoukenFire;
     public int FireballDamage;
-    [SerializeField]
-    private float fireballSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +59,7 @@ public class AkatsukiFunctions : CharFunctions
         b.transform.position = FireballStartLoc.transform.position;
         if (CharInputEngine.faceRight) //CHECK FLIP
         {
-            b.GetComponent<Rigidbody2D>().velocity = transform.right * fireballSpeed;
+            b.GetComponent<Rigidbody2D>().velocity = transform.right * 60;
         }
         else
         {
@@ -67,7 +67,7 @@ public class AkatsukiFunctions : CharFunctions
             theScale.x *= -1;
             b.transform.localScale = theScale; //flip sprite
 
-            b.GetComponent<Rigidbody2D>().velocity = -transform.right * fireballSpeed;
+            b.GetComponent<Rigidbody2D>().velocity = -transform.right * 60;
         }
     }
 
