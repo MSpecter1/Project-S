@@ -386,8 +386,8 @@ MonoBehaviour:
   attackDamage: 500
   thisAttackType: 1
   thisAttackLaunchType: 0
-  framesOnHit: 17
-  framesOnBlock: 13
+  framesOnHit: 6
+  framesOnBlock: 22
   low: 0
   overhead: 0
   lightCancellable: 0
@@ -396,7 +396,6 @@ MonoBehaviour:
   abilityCancellable: 0
   thisHitbox: {fileID: 0}
   playerNumber: 0
-  timeshit: 0
   AttackKnockback: 400
 --- !u!1 &5026030164119379415
 GameObject:
@@ -724,7 +723,7 @@ MonoBehaviour:
   thisAttackType: 2
   thisAttackLaunchType: 0
   framesOnHit: 9
-  framesOnBlock: 20
+  framesOnBlock: 5
   low: 0
   overhead: 0
   lightCancellable: 0
@@ -733,7 +732,6 @@ MonoBehaviour:
   abilityCancellable: 0
   thisHitbox: {fileID: 0}
   playerNumber: 0
-  timeshit: 0
   AttackKnockback: 800
 --- !u!1 &7363072916951909558
 GameObject:
@@ -926,8 +924,8 @@ MonoBehaviour:
   attackDamage: 200
   thisAttackType: 0
   thisAttackLaunchType: 0
-  framesOnHit: 18
-  framesOnBlock: 15
+  framesOnHit: 5
+  framesOnBlock: 19
   low: 0
   overhead: 0
   lightCancellable: 0
@@ -936,7 +934,6 @@ MonoBehaviour:
   abilityCancellable: 0
   thisHitbox: {fileID: 0}
   playerNumber: 0
-  timeshit: 0
   AttackKnockback: 400
 --- !u!1 &7803615251540411616
 GameObject:
